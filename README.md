@@ -25,7 +25,8 @@ The scene includes individual gravel instances, swaying aquatic plants, textured
 | Awaken a dream | D or Dream button |
 | Pause | Space or pause button |
 | Time speed | 1×, 5×, 20× buttons |
-| Instructions and sound | Help button; H on keyboard |
+| Instructions | Help button; H on keyboard |
+| Graphics, sound, controls and accessibility | Gear button; F1 or F10 |
 | Mobile journal and fish shop | Tank notes → Journal / Fish |
 
 At 1×, a simulated hour takes 80 seconds. Progress saves every 12 seconds, on care/reward actions, and when the game is suspended or closed. There is no offline time catch-up.
@@ -82,6 +83,10 @@ The nitrogen cycle is a forgiving, accelerated game approximation. Species are p
 The original playable build passed the official engine's 120-frame package check, strict TypeScript checking, native Vulkan rendering and scripted 1440×900 desktop / 390×844 mobile feeding, journal reward and dream-unlock interactions. Model checks covered 30 simulated hours, fish bounds, overfeeding penalties, water-change dilution and pellet consumption/expiration.
 
 This repository was checked again with the pinned engine after preparing the root-level game package. Browser end-to-end playtesting of the hosted private build was blocked by its sign-in gate; the native checks exercise the same game source.
+
+## Publish
+
+Run `npm run package` after changes, commit the generated loader and file index with the source, then run `npm run publish:starhermit`. The shared uploader uses the existing `../.env` publishing credentials and records the deployed game in `publication.json`. See [spec.md](spec.md) for artwork, graphics tiers and validation details.
 
 ## License
 

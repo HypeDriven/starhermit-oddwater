@@ -16,3 +16,7 @@ engine.gamepad.feed=South
 engine.gamepad.pause=Start
 cache..=0
 engine.limits.meshes=4096
+cover=cover.jpg
+version=1.0.0
+contentVersion=1
+control.options=F10 | Open options

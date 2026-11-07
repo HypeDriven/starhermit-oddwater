@@ -1,0 +1,17 @@
+# viewport 390x844
+frames 40
+expect ODDWATER
+touch Feed
+expect Dinner is served
+touch Tank notes
+touch Journal
+expect The keeper’s journal
+touch Collect +12
+frames 2
+expect Remembered
+touch Water
+expect 30% water changed
+save mobile
+key F10 2
+expect Options
+save mobile-options

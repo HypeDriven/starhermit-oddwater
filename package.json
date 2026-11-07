@@ -1,0 +1,11 @@
+{
+  "name": "oddwater",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "package": "node tools/package-web.mjs",
+    "publish:starhermit": "node --env-file-if-exists=../.env tools/publish.mjs",
+    "test": "node tools/check.mjs"
+  }
+}

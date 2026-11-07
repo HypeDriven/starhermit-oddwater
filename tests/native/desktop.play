@@ -1,0 +1,22 @@
+# viewport 1440x900
+frames 40
+expect ODDWATER
+click Feed
+expect Dinner is served
+click Collect +12
+frames 2
+expect Remembered
+click Water change
+expect 30% water changed
+click Plant
+expect A new plant takes root
+click Dream
+expect An orbiting pearl
+click ?
+expect Welcome to Oddwater
+click Back to the water
+key F10 2
+expect Options
+save desktop-options
+key Escape 2
+save desktop

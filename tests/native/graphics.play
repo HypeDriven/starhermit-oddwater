@@ -1,0 +1,7 @@
+# viewport 1280x720
+frames 40
+expect ODDWATER
+measure start
+frames 120
+measure stop
+save graphics
