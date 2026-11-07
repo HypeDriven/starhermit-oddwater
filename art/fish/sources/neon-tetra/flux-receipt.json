@@ -1,0 +1,28 @@
+{
+  "service": "flux",
+  "request": {
+    "prompt": "A single living freshwater aquarium fish, full body including every fin and tail completely inside the image, facing RIGHT with its head at the right and tail at the left, a clear side profile with a very subtle three-quarter view so its body has volume. Realistic premium aquarium game creature asset, exquisite natural anatomy and detailed scales, closed mouth, one fish only, fins extended in a neutral swimming pose. Even soft studio illumination, isolated against a plain light neutral grey background, no water, no bubbles, no plants, no shadows on a floor, no ground, no text, no labels, no watermark. Opaque visible softly translucent fin membranes with clear fin rays, no motion blur. Fish fills 80 percent of the square image width, centered, generous clear margin all around. Neon tetra (Paracheirodon innesi). A tiny slender torpedo-shaped freshwater fish, brilliant iridescent turquoise blue stripe from eye to tail, bright scarlet red stripe along the REAR HALF of its lower body, pearly silver belly, olive translucent back, large realistic dark eye rimmed with silver. Small clear-grey dorsal and forked tail fins, graceful thin body, no whiskers.",
+    "width": 1024,
+    "height": 1024,
+    "num_inference_steps": 28,
+    "guidance_scale": 4,
+    "seed": 7111,
+    "return_base64": false
+  },
+  "response": {
+    "images": [
+      {
+        "file": "20261107T110748-4c532473.png",
+        "url": "/outputs/20261107T110748-4c532473.png",
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "seed": 7111,
+    "seconds": 112.9,
+    "steps": 28,
+    "edited": false
+  },
+  "sha256": "3c6991d8f7183ec344accf2573e2d6e95add5419e07cda0c89fbf0008d0032a3",
+  "createdAt": "2026-11-07T11:07:49Z"
+}

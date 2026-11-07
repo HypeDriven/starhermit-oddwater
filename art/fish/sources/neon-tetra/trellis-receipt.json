@@ -1,0 +1,27 @@
+{
+  "service": "trellis",
+  "request": {
+    "formats": [
+      "glb"
+    ],
+    "seed": 7111,
+    "ss_sampling_steps": 20,
+    "slat_sampling_steps": 20,
+    "simplify": 0.95,
+    "texture_size": 1024,
+    "remove_background": true
+  },
+  "response": {
+    "files": {
+      "glb": {
+        "file": "20261107T110750-16b6fdca.glb",
+        "url": "/outputs/20261107T110750-16b6fdca.glb",
+        "bytes": 1211180
+      }
+    },
+    "seed": 7111,
+    "seconds": 22.4
+  },
+  "sha256": "b58c44179aa4fcaa776c200dffd1a167626830e50582cf6ccff2e3fb27f15374",
+  "createdAt": "2026-11-07T11:08:12Z"
+}

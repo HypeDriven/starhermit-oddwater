@@ -1,4 +1,5 @@
 # viewport 1280x720
+until 1200 ODDWATER
 frames 40
 expect ODDWATER
 measure start

@@ -1,0 +1,4 @@
+aquarium | sfx/aquarium.ogg | MOSS: quiet continuous sponge-filter bubbles and soft water trickle; loops on the effects bus while Sound is on.
+feed | sfx/feed.ogg | MOSS: delicate dry food rustle and tiny plips; successful feeding.
+water | sfx/water.ogg | MOSS: gentle clean-water pour and bubbles; 30% water change.
+dream | sfx/dream.ogg | MOSS: one shimmering glass bell and watery sparkle; a dream awakens.

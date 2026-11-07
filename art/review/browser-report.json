@@ -1,0 +1,18 @@
+[
+  {
+    "name": "desktop",
+    "gpu": "software",
+    "state": "running",
+    "initialBytes": 301472,
+    "ok": true,
+    "problems": []
+  },
+  {
+    "name": "phone",
+    "gpu": "software",
+    "state": "running",
+    "initialBytes": 364205,
+    "ok": true,
+    "problems": []
+  }
+]

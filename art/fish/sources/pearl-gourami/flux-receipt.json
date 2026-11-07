@@ -1,0 +1,28 @@
+{
+  "service": "flux",
+  "request": {
+    "prompt": "A single living freshwater aquarium fish, full body including every fin and tail completely inside the image, facing RIGHT with its head at the right and tail at the left, a clear side profile with a very subtle three-quarter view so its body has volume. Realistic premium aquarium game creature asset, exquisite natural anatomy and detailed scales, closed mouth, one fish only, fins extended in a neutral swimming pose. Even soft studio illumination, isolated against a plain light neutral grey background, no water, no bubbles, no plants, no shadows on a floor, no ground, no text, no labels, no watermark. Opaque visible softly translucent fin membranes with clear fin rays, no motion blur. Fish fills 80 percent of the square image width, centered, generous clear margin all around. Pearl gourami (Trichopodus leerii). A graceful laterally compressed oval body, bronze and warm silver shimmering scales covered in many distinct tiny cream PEARL SPOTS, a thin dark horizontal stripe from mouth through eye to tail, a warm burnt orange throat and chest. Long elegant dorsal and anal fins with fine delicate rays and pearl pattern, rounded lyre-like tail, two characteristic long thin pelvic feelers beneath the body. A realistic healthy freshwater gourami, peaceful and regal.",
+    "width": 1024,
+    "height": 1024,
+    "num_inference_steps": 28,
+    "guidance_scale": 4,
+    "seed": 7114,
+    "return_base64": false
+  },
+  "response": {
+    "images": [
+      {
+        "file": "20261107T111434-12cadaa7.png",
+        "url": "/outputs/20261107T111434-12cadaa7.png",
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "seed": 7114,
+    "seconds": 112.1,
+    "steps": 28,
+    "edited": false
+  },
+  "sha256": "4443586e656e8a173da2f7ca6b7f888f08415905435f954284ee18bca4b66f40",
+  "createdAt": "2026-11-07T11:14:36Z"
+}

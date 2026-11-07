@@ -1,11 +1,15 @@
 {
   "name": "oddwater",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
     "package": "node tools/package-web.mjs",
     "publish:starhermit": "node --env-file-if-exists=../.env tools/publish.mjs",
-    "test": "node tools/check.mjs"
+    "test": "node tests/gravel.test.mjs && node tools/check.mjs",
+    "test:physics": "node tests/gravel.test.mjs",
+    "assets:generate": "python3 tools/remaster/generate.py",
+    "assets:prepare": "python3 tools/remaster/prepare.py && node tools/remaster/optimize.mjs",
+    "test:browser": "env -u DISPLAY -u WAYLAND_DISPLAY -u PULSE_SERVER -u XDG_RUNTIME_DIR node tests/browser.mjs"
   }
 }

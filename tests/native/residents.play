@@ -1,0 +1,16 @@
+# viewport 1440x900
+until 1200 ODDWATER
+frames 40
+expect 7 shrimp
+# The nerite grazes the front glass near the left-hand planting.
+click 397 540
+frames 2
+expect Nerite snail
+save residents-inspect
+# Show the collection and confirm that old fish-purchase controls still work.
+click Meet the neighbours
+expect Compatible community fish
+click Welcome home
+frames 2
+expect New neighbours arrive
+save residents-and-fish

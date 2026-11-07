@@ -1,0 +1,20 @@
+# viewport 1440x900
+until 1200 ODDWATER
+frames 12
+expect ODDWATER
+expect 7 shrimp
+save remaster-tank
+click Sound off
+frames 8
+save remaster-sound
+click Feed
+frames 8
+expect Dinner is served
+save remaster-fed
+click Water change
+frames 30
+expect 30% water changed
+save remaster-water
+click Daylight
+frames 6
+save remaster-night

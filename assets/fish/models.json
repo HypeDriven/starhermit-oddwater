@@ -1,0 +1,154 @@
+{
+  "neon-tetra": {
+    "sourceSha256": "b58c44179aa4fcaa776c200dffd1a167626830e50582cf6ccff2e3fb27f15374",
+    "sourceTriangles": 2950,
+    "bounds": [
+      [
+        -0.5,
+        -0.21326251352213313,
+        -0.14720304304882115
+      ],
+      [
+        0.5,
+        0.21326251352213313,
+        0.14720304304882115
+      ]
+    ],
+    "lods": {
+      "low": {
+        "triangles": 1800,
+        "bytes": 171072,
+        "sha256": "5cb4ba4456b5245c416c05614926d241376d2c89f57cd939a603b4b971e28920"
+      },
+      "balanced": {
+        "triangles": 2950,
+        "bytes": 452608,
+        "sha256": "2b6f758b00228d3ed28c7a316f1fa06c3e02e8b8285fad2675660bcc3d02faa8"
+      },
+      "high": {
+        "triangles": 2950,
+        "bytes": 858832,
+        "sha256": "946847d725558b838d0ca61d87d1a6cd17a6281f24527b5bf98f11ee5368f3ce"
+      },
+      "ultra": {
+        "triangles": 2950,
+        "bytes": 1337000,
+        "sha256": "6c59ab113b04b3c11eefd77a090239184783f523cb3005c1b4923eac24d3efdf"
+      }
+    }
+  },
+  "harlequin-rasbora": {
+    "sourceSha256": "d427981c17facec2af120071c7cbba9d095c4f4a9aecb4b55aec2783fde1742a",
+    "sourceTriangles": 3228,
+    "bounds": [
+      [
+        -0.5,
+        -0.2421795044389295,
+        -0.06519936326023729
+      ],
+      [
+        0.5,
+        0.2421795044389295,
+        0.06519936326023729
+      ]
+    ],
+    "lods": {
+      "low": {
+        "triangles": 1800,
+        "bytes": 180556,
+        "sha256": "fbaab6dc60f5d8ed4930657320a9a71a95e7c7769582f0ae7f0cb8b795186838"
+      },
+      "balanced": {
+        "triangles": 3228,
+        "bytes": 477420,
+        "sha256": "cca28a8315ddefb38d4f7be9757ccf18672a5eefe4d848884eb9620b741fb1d6"
+      },
+      "high": {
+        "triangles": 3228,
+        "bytes": 908388,
+        "sha256": "82314f19538730be35f3e60164d843215938d2f327b96bbbe9b65b9addedc329"
+      },
+      "ultra": {
+        "triangles": 3228,
+        "bytes": 1495628,
+        "sha256": "f10b425742368d688cf4fcbb66ddc7fe0a2a54958c1853cd7152d30243501a6f"
+      }
+    }
+  },
+  "peppered-cory": {
+    "sourceSha256": "e45a5871c791b77748b241a0bb4c5b51afb04c981222d0a4b83ec8625a183156",
+    "sourceTriangles": 4196,
+    "bounds": [
+      [
+        -0.5,
+        -0.2339406499921432,
+        -0.11555839208649876
+      ],
+      [
+        0.5,
+        0.2339406499921432,
+        0.11555839208649876
+      ]
+    ],
+    "lods": {
+      "low": {
+        "triangles": 1800,
+        "bytes": 198368,
+        "sha256": "bef66917f5062a7428facc29cc54d92a318033a8a8b4ebb37dc9777faf917be3"
+      },
+      "balanced": {
+        "triangles": 4000,
+        "bytes": 541784,
+        "sha256": "42584b7a7b9a9ae74a70667feddc9b210f1a992987af86f8de0e15b1a4dab96b"
+      },
+      "high": {
+        "triangles": 4196,
+        "bytes": 1004060,
+        "sha256": "eaa9b2ae371d8eed9df97f5283bf2046a3845dab044170abcc9648d75dcc67d1"
+      },
+      "ultra": {
+        "triangles": 4196,
+        "bytes": 1597436,
+        "sha256": "8e07e5fe10290afd4f396316bbce1025aaef557e2c15443e45e6024b4798b7cb"
+      }
+    }
+  },
+  "pearl-gourami": {
+    "sourceSha256": "2a735a31d1e6c8620eb6ac27907e29151dbdb737c118a7553eb4e1064f255c33",
+    "sourceTriangles": 7008,
+    "bounds": [
+      [
+        -0.5,
+        -0.3539464909568613,
+        -0.15203386073298109
+      ],
+      [
+        0.5,
+        0.3539464909568613,
+        0.15203386073298109
+      ]
+    ],
+    "lods": {
+      "low": {
+        "triangles": 1798,
+        "bytes": 219188,
+        "sha256": "d2b8fbe4e77c9394cb83f3ef7a35870e41d008704d5465d40809444a58f8327e"
+      },
+      "balanced": {
+        "triangles": 4000,
+        "bytes": 608048,
+        "sha256": "38d047a9b86398edcfc52f5388d502d785f033b6ea824d3e3f240aa93598ed80"
+      },
+      "high": {
+        "triangles": 7008,
+        "bytes": 1171848,
+        "sha256": "4d10154e31037b1533dba02dd2ba604f92e88bee2b188c6b82da5abfea7d72fb"
+      },
+      "ultra": {
+        "triangles": 7008,
+        "bytes": 1806548,
+        "sha256": "02257712f8622882c81a2495efd312fe5d51488c4c6a5d731c10337a9502b156"
+      }
+    }
+  }
+}

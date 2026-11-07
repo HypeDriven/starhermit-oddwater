@@ -1,0 +1,28 @@
+{
+  "service": "flux",
+  "request": {
+    "prompt": "A single living freshwater aquarium fish, full body including every fin and tail completely inside the image, facing RIGHT with its head at the right and tail at the left, a clear side profile with a very subtle three-quarter view so its body has volume. Realistic premium aquarium game creature asset, exquisite natural anatomy and detailed scales, closed mouth, one fish only, fins extended in a neutral swimming pose. Even soft studio illumination, isolated against a plain light neutral grey background, no water, no bubbles, no plants, no shadows on a floor, no ground, no text, no labels, no watermark. Opaque visible softly translucent fin membranes with clear fin rays, no motion blur. Fish fills 80 percent of the square image width, centered, generous clear margin all around. Peppered cory catfish (Corydoras paleatus). A small stocky bottom-dwelling armored catfish, pale bronze silver body with irregular dark charcoal and olive peppered mottled patches on both sides, clearly defined overlapping armor plates, rounded blunt snout and small dark eye, short fine barbels beside the mouth. High triangular dorsal fin, broad paired pectoral fins, speckled fan-shaped tail, cream belly. Low wedge body silhouette, natural anatomy.",
+    "width": 1024,
+    "height": 1024,
+    "num_inference_steps": 28,
+    "guidance_scale": 4,
+    "seed": 7113,
+    "return_base64": false
+  },
+  "response": {
+    "images": [
+      {
+        "file": "20261107T111218-60dc00a7.png",
+        "url": "/outputs/20261107T111218-60dc00a7.png",
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "seed": 7113,
+    "seconds": 111.6,
+    "steps": 28,
+    "edited": false
+  },
+  "sha256": "2bd9ec633b0c6a1c7a4dcf03d41288da3d4da935a67df4ed91686f876ae7b2c8",
+  "createdAt": "2026-11-07T11:12:19Z"
+}

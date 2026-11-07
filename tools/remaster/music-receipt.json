@@ -1,0 +1,182 @@
+{
+  "prompt": [
+    1889,
+    "6d8ad275-037e-43e1-9f54-b3df4324a448",
+    {
+      "1": {
+        "class_type": "CheckpointLoaderSimple",
+        "inputs": {
+          "ckpt_name": "yue2_3b_bf16.safetensors"
+        }
+      },
+      "2": {
+        "class_type": "YuE2GenerateABC",
+        "inputs": {
+          "clip": [
+            "1",
+            1
+          ],
+          "style": "Instrumental peaceful ambient aquarium game soundtrack, delicate felt piano, soft warm analog synthesizer pads, occasional crystalline celesta notes like light on water, slow floating melody in D major, 66 BPM, spacious and intimate, gentle evolving chords, no drums, no percussion, no vocals, no choir, no lyrics, no dramatic crescendos. Quietly magical and contemplative, a small planted freshwater world slowly dreaming.",
+          "lyrics": "[instrumental]\n",
+          "seed": 7119,
+          "mode": "full",
+          "max_abc_tokens": 8192,
+          "temperature": 0.7,
+          "top_p": 0.9,
+          "top_k": 30,
+          "repetition_penalty": 1.005,
+          "penalty_window": 100
+        }
+      },
+      "3": {
+        "class_type": "YuE2GenerateMusic",
+        "inputs": {
+          "clip": [
+            "1",
+            1
+          ],
+          "abc": [
+            "2",
+            0
+          ],
+          "style": "Instrumental peaceful ambient aquarium game soundtrack, delicate felt piano, soft warm analog synthesizer pads, occasional crystalline celesta notes like light on water, slow floating melody in D major, 66 BPM, spacious and intimate, gentle evolving chords, no drums, no percussion, no vocals, no choir, no lyrics, no dramatic crescendos. Quietly magical and contemplative, a small planted freshwater world slowly dreaming.",
+          "lyrics": "[instrumental]\n",
+          "seed": 7119,
+          "mode": "full",
+          "max_duration": 90.0,
+          "temperature": 1.0,
+          "top_p": 0.95,
+          "top_k": 100,
+          "repetition_penalty": 1.2,
+          "cfg_scale": 1.0
+        }
+      },
+      "4": {
+        "class_type": "EmptyYuE2LatentAudio",
+        "inputs": {
+          "seconds": [
+            "3",
+            1
+          ],
+          "batch_size": 1
+        }
+      },
+      "5": {
+        "class_type": "ConditioningZeroOut",
+        "inputs": {
+          "conditioning": [
+            "3",
+            0
+          ]
+        }
+      },
+      "6": {
+        "class_type": "KSampler",
+        "inputs": {
+          "model": [
+            "1",
+            0
+          ],
+          "positive": [
+            "3",
+            0
+          ],
+          "negative": [
+            "5",
+            0
+          ],
+          "latent_image": [
+            "4",
+            0
+          ],
+          "seed": 7119,
+          "steps": 32,
+          "cfg": 1.0,
+          "sampler_name": "dpm_2",
+          "scheduler": "sgm_uniform",
+          "denoise": 1.0
+        }
+      },
+      "7": {
+        "class_type": "VAEDecodeAudio",
+        "inputs": {
+          "samples": [
+            "6",
+            0
+          ],
+          "vae": [
+            "1",
+            2
+          ]
+        }
+      },
+      "8": {
+        "class_type": "SaveAudioAdvanced",
+        "inputs": {
+          "audio": [
+            "7",
+            0
+          ],
+          "filename_prefix": "audio/Oddwater-20261107",
+          "format": "flac"
+        }
+      }
+    },
+    {
+      "create_time": 1794049392092
+    },
+    [
+      "8"
+    ]
+  ],
+  "outputs": {
+    "8": {
+      "audio": [
+        {
+          "filename": "Oddwater-20261107_00001.flac",
+          "subfolder": "audio",
+          "type": "output",
+          "id": "5cc5c5ba-a2fa-434c-8efd-5d34f1965418"
+        }
+      ]
+    }
+  },
+  "status": {
+    "status_str": "success",
+    "completed": true,
+    "messages": [
+      [
+        "execution_start",
+        {
+          "prompt_id": "6d8ad275-037e-43e1-9f54-b3df4324a448",
+          "timestamp": 1794049392094
+        }
+      ],
+      [
+        "execution_cached",
+        {
+          "nodes": [
+            "1"
+          ],
+          "prompt_id": "6d8ad275-037e-43e1-9f54-b3df4324a448",
+          "timestamp": 1794049392097
+        }
+      ],
+      [
+        "execution_success",
+        {
+          "prompt_id": "6d8ad275-037e-43e1-9f54-b3df4324a448",
+          "timestamp": 1794049921576
+        }
+      ]
+    ]
+  },
+  "meta": {
+    "8": {
+      "node_id": "8",
+      "display_node": "8",
+      "parent_node": null,
+      "real_node_id": "8"
+    }
+  }
+}

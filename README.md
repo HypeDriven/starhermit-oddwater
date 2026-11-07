@@ -4,13 +4,17 @@ A 3D freshwater aquarium game built directly on **StarHermit Engine 1.38.0**. Ke
 
 ## The aquarium
 
-Start with eight neon tetras, six harlequin rasboras, four peppered corys and one pearl gourami in a planted 180 L community tank. Fish school with their own species, avoid one another and the tank boundaries, forage at different depths, and chase sinking food when hungry. Their tails and paired fins animate independently.
+Start with eight neon tetras, six harlequin rasboras, four peppered corys and one pearl gourami in a planted 180 L community tank. Fish school with their own species, avoid one another and the tank boundaries, forage at different depths, and chase sinking food when hungry. The fish use four FLUX → TRELLIS textured models with flexible body and tail animation, light scattering and four visual detail levels.
 
 The simulation tracks hunger, fish health, organic waste, ammonia, nitrite, nitrate, dissolved oxygen, algae and biological filtration. Uneaten food becomes waste. Filter bacteria process ammonia into nitrite and nitrate; plants take up nitrate, and water changes dilute it.
 
 Healthy fish earn **Wonder**. Complete the keeper's journal, welcome new fish groups, add plants, and awaken an orbiting pearl, an underwater moon and an upside-down tea party.
 
-The scene includes individual gravel instances, swaying aquatic plants, textured driftwood and rocks, animated caustic shading, shadows, translucent water, filter bubbles, optional synthesized aquarium ambience and autosave.
+The scene includes a voxel collision simulation for 3,000 pebbles, swaying translucent leaves, textured driftwood and rocks, and the StarHermit engine’s GPU FFT water, focused caustics, planar reflections, refraction and light shafts on High/Ultra. Fresnel-shaded filter bubbles rise and wobble before sending ripples across the surface.
+
+Seven cherry/Amano shrimp, three nerite/ramshorn snails and three small aquatic insects browse the tank. Click them to inspect them. Water changes and clicking empty gravel disturb the substrate.
+
+Turn Sound on for MOSS aquarium ambience and care sounds, plus a 90-second YuE instrumental track. The engine’s Options controls music and effects volume. Existing aquarium saves remain compatible.
 
 ## Controls
 
@@ -82,7 +86,7 @@ The nitrogen cycle is a forgiving, accelerated game approximation. Species are p
 
 The original playable build passed the official engine's 120-frame package check, strict TypeScript checking, native Vulkan rendering and scripted 1440×900 desktop / 390×844 mobile feeding, journal reward and dream-unlock interactions. Model checks covered 30 simulated hours, fish bounds, overfeeding penalties, water-change dilution and pellet consumption/expiration.
 
-This repository was checked again with the pinned engine after preparing the root-level game package. Browser end-to-end playtesting of the hosted private build was blocked by its sign-in gate; the native checks exercise the same game source.
+The 1.1 remaster passes strict TypeScript, the official 120-frame package check, three voxel-physics tests and native gameplay/rendering checks at Low, Balanced, High and Ultra. Desktop and phone browser startup are checked against the packaged game; generated models, sound, water interaction and resident purchases are also exercised. See [spec.md](spec.md) for the release record.
 
 ## Publish
 

@@ -1,0 +1,28 @@
+{
+  "service": "flux",
+  "request": {
+    "prompt": "A single living freshwater aquarium fish, full body including every fin and tail completely inside the image, facing RIGHT with its head at the right and tail at the left, a clear side profile with a very subtle three-quarter view so its body has volume. Realistic premium aquarium game creature asset, exquisite natural anatomy and detailed scales, closed mouth, one fish only, fins extended in a neutral swimming pose. Even soft studio illumination, isolated against a plain light neutral grey background, no water, no bubbles, no plants, no shadows on a floor, no ground, no text, no labels, no watermark. Opaque visible softly translucent fin membranes with clear fin rays, no motion blur. Fish fills 80 percent of the square image width, centered, generous clear margin all around. Harlequin rasbora (Trigonostigma heteromorpha). Warm copper peach pink reflective scales, a deeper diamond-shaped body, the distinctive large sharp BLACK TRIANGULAR WEDGE on the rear half of its side that tapers to the tail, bright amber eye with dark pupil, delicate orange-red dorsal and deeply forked tail fins. Elegant natural aquarium fish, no whiskers.",
+    "width": 1024,
+    "height": 1024,
+    "num_inference_steps": 28,
+    "guidance_scale": 4,
+    "seed": 7112,
+    "return_base64": false
+  },
+  "response": {
+    "images": [
+      {
+        "file": "20261107T111003-e3f960f0.png",
+        "url": "/outputs/20261107T111003-e3f960f0.png",
+        "width": 1024,
+        "height": 1024
+      }
+    ],
+    "seed": 7112,
+    "seconds": 112.2,
+    "steps": 28,
+    "edited": false
+  },
+  "sha256": "25daece30e9f4617a98aa25ca9c04736301600a6e8017e5aac73381cf7e4e525",
+  "createdAt": "2026-11-07T11:10:05Z"
+}
