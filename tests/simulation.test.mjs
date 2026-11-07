@@ -7,7 +7,7 @@ test('a v1 aquarium migrates without losing fish, Wonder, plants, dreams or jour
  const old=copy(before);old.version=1;
  for(const k of ['filter','aerator','filterDirt','lightHours','foodKind','plantGrowth','cuttings','crewEnergy','observed','milestones','counters','project','nursery','log'])delete old[k];
  for(const f of old.fish)for(const k of ['name','stress','bond','growth','meals'])delete f[k];
- const after=restoreAquarium(old);assert.equal(after.version,2);assert.equal(after.wonder,137);assert.equal(after.plants,14);assert.equal(after.dreams,2);assert.deepEqual(after.claimed,[0,2]);assert.equal(after.fish.length,19);assert.equal(after.fish[0].health,73);assert.equal(after.fish[0].growth,1);assert.ok(after.fish.every(f=>f.name&&Number.isFinite(f.stress)));
+ const after=restoreAquarium(old);assert.equal(after.version,3);assert.equal(after.wonder,137);assert.equal(after.plants,14);assert.equal(after.dreams,2);assert.deepEqual(after.claimed,[0,2]);assert.equal(after.fish.length,19);assert.equal(after.fish[0].health,73);assert.equal(after.fish[0].growth,1);assert.ok(after.fish.every(f=>f.name&&Number.isFinite(f.stress)));
 });
 test('new progression, juvenile growth and nursery progress survive a save round trip',()=>{
  const s=newAquarium();s.filter=1;s.aerator=2;s.cuttings=3;s.observed=['fish-0','Cherry shrimp'];s.nursery={type:0,hours:4.5,ready:false};s.fish[0].name='Tiny comet';s.fish[0].growth=.43;s.project.cycle=2;s.project.calm=1.25;

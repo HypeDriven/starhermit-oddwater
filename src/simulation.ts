@@ -1,3 +1,5 @@
+import {newEcology,restoreEcology,advanceEcology,habitatPositions} from './ecology.js';
+import type {Ecology} from './ecology.js';
 // Oddwater's forgiving freshwater ecosystem. All progression uses simulated hours.
 export const clamp=(x:number,a:number,b:number)=>Math.max(a,Math.min(b,x));
 export type FoodKind='flakes'|'sinking'|'greens';
@@ -18,13 +20,13 @@ export interface Nursery{type:number;hours:number;ready:boolean;}
 export interface Counters{rinsed:number;trimmed:number;bred:number;meals:number;foodKinds:number;rehomed:number;}
 export interface KeeperProject{cycle:number;baseline:Counters;started:number;calm:number;}
 export interface Aquarium{
- version:2;hours:number;wonder:number;ammonia:number;nitrite:number;nitrate:number;oxygen:number;temp:number;ph:number;bacteria:number;plants:number;algae:number;food:number;fed:number;changed:number;dreams:number;fish:Fish[];pellets:Pellet[];healthy:number;claimed:number[];
+ version:3;ecology:Ecology;hours:number;wonder:number;ammonia:number;nitrite:number;nitrate:number;oxygen:number;temp:number;ph:number;bacteria:number;plants:number;algae:number;food:number;fed:number;changed:number;dreams:number;fish:Fish[];pellets:Pellet[];healthy:number;claimed:number[];
  filter:number;aerator:number;filterDirt:number;lightHours:number;foodKind:FoodKind;plantGrowth:number;cuttings:number;crewEnergy:number;observed:string[];milestones:string[];counters:Counters;project:KeeperProject;nursery:Nursery|null;log:{hour:number;text:string}[];
 }
 const names=['Ripple','Clover','Pebble','Juniper','Miso','Pip','Fern','Comet','Moss','Opal','Puddle','Willow','Nori','Copper','Bramble','Lumen','Biscuit','Cedar','Pearl','Wisp','Echo','Maple','Dew','Tansy','Nimbus','Reed','Cinder','Dapple','Brook','Sprout','Olive','Coral','Mica','Cress','Finch'];
 const counts=():Counters=>({rinsed:0,trimmed:0,bred:0,meals:0,foodKinds:0,rehomed:0});
 export function newAquarium():Aquarium{
- const s:Aquarium={version:2,hours:8,wonder:32,ammonia:.015,nitrite:.008,nitrate:8.2,oxygen:7.4,temp:25,ph:6.9,bacteria:.85,plants:9,algae:.04,food:0,fed:0,changed:0,dreams:0,fish:[],pellets:[],healthy:0,claimed:[],filter:0,aerator:0,filterDirt:.04,lightHours:8,foodKind:'flakes',plantGrowth:.15,cuttings:0,crewEnergy:.8,observed:[],milestones:[],counters:counts(),project:{cycle:0,baseline:counts(),started:8,calm:0},nursery:null,log:[]};
+ const s:Aquarium={version:3,ecology:newEcology(),hours:8,wonder:32,ammonia:.015,nitrite:.008,nitrate:8.2,oxygen:7.4,temp:25,ph:6.9,bacteria:.85,plants:9,algae:.04,food:0,fed:0,changed:0,dreams:0,fish:[],pellets:[],healthy:0,claimed:[],filter:0,aerator:0,filterDirt:.04,lightHours:8,foodKind:'flakes',plantGrowth:.15,cuttings:0,crewEnergy:.8,observed:[],milestones:[],counters:counts(),project:{cycle:0,baseline:counts(),started:8,calm:0},nursery:null,log:[]};
  addFish(s,0,8);addFish(s,1,6);addFish(s,2,4);addFish(s,3,1);record(s,'An established aquarium. A whole community to get to know.');return s;
 }
 function finite(value:unknown,fallback:number,lo:number,hi:number){return typeof value==='number'&&Number.isFinite(value)?clamp(value,lo,hi):fallback;}
@@ -32,7 +34,7 @@ function finite(value:unknown,fallback:number,lo:number,hi:number){return typeof
 export function restoreAquarium(raw:unknown):Aquarium{
  if(!raw||typeof raw!=='object')return newAquarium();
  const saved=raw as Record<string,unknown>;
- if(![1,2].includes(saved.version as number)||!Array.isArray(saved.fish)||!saved.fish.length||saved.fish.length>50)return newAquarium();
+ if(![1,2,3].includes(saved.version as number)||!Array.isArray(saved.fish)||!saved.fish.length||saved.fish.length>50)return newAquarium();
  const s=newAquarium();
  const limits:Record<string,[number,number]>={hours:[0,1e7],wonder:[0,1e9],ammonia:[0,100],nitrite:[0,100],nitrate:[0,1000],oxygen:[2,9],temp:[15,35],ph:[5.8,8],bacteria:[0,1.5],plants:[0,36],algae:[0,1],food:[0,100],fed:[0,1e8],changed:[0,1e8],dreams:[0,3],healthy:[0,1e10],filter:[0,2],aerator:[0,2],filterDirt:[0,1],lightHours:[6,12],plantGrowth:[0,1],cuttings:[0,20],crewEnergy:[0,1]};
  for(const [key,[lo,hi]] of Object.entries(limits)){const dest=s as unknown as Record<string,unknown>;dest[key]=finite(saved[key],dest[key] as number,lo,hi);}
@@ -54,6 +56,7 @@ export function restoreAquarium(raw:unknown):Aquarium{
  for(const key of Object.keys(s.counters) as (keyof Counters)[])s.project.baseline[key]=finite(project?.baseline?.[key],s.counters[key],0,s.counters[key]);
  const nursery=saved.nursery as Partial<Nursery>|undefined;s.nursery=nursery&&Number.isInteger(nursery.type)&&(nursery.type??-1)>=0&&(nursery.type??4)<4?{type:nursery.type!,hours:finite(nursery.hours,0,0,12),ready:nursery.ready===true}:null;
  s.log=Array.isArray(saved.log)?saved.log.filter((v):v is {hour:number;text:string}=>!!v&&typeof v==='object'&&Number.isFinite(v.hour)&&typeof v.text==='string').slice(-30).map(v=>({hour:v.hour,text:v.text.slice(0,180)})):[];
+ s.ecology=restoreEcology(saved.ecology);
  if(saved.version===1)record(s,'The keeper’s notebook is open: foods, equipment, observations and a nursery.');return s;
 }
 export function record(s:Aquarium,text:string){s.log.push({hour:s.hours,text});if(s.log.length>30)s.log.shift();}
@@ -116,6 +119,8 @@ export function milestoneList(s:Aquarium){return [
  {id:'nursery',title:'A smaller kind of wonder',detail:'Welcome two home-raised juveniles',progress:s.counters.bred,target:2,reward:35},
  {id:'naturalist',title:'The complete field guide',detail:'Observe every species in the tank',progress:s.observed.length,target:guide.length,reward:30},
  {id:'steward',title:'Room for the next generation',detail:'Rehome two fish while keeping social groups',progress:s.counters.rehomed,target:2,reward:15},
+ {id:'colony',title:'A thriving little colony',detail:'Welcome six home-raised cherry shrimp',progress:s.ecology.born,target:6,reward:30},
+ {id:'fieldwork',title:'The small hours',detail:'Record all four behavior field notes',progress:s.ecology.notes.length,target:4,reward:25},
  {id:'reverie',title:'Ordinary impossibilities',detail:'Awaken all three dreams',progress:s.dreams,target:3,reward:40},
  ];}
 export function claimMilestone(s:Aquarium,id:string){const m=milestoneList(s).find(m=>m.id===id);if(!m||s.milestones.includes(id)||m.progress<m.target)return false;s.milestones.push(id);s.wonder+=m.reward;record(s,`${m.title}. +${m.reward} Wonder.`);return true;}
@@ -147,13 +152,13 @@ export function advance(s:Aquarium,seconds:number,speed:number){
  const efficiency=(1+s.filter*.42)*(1-s.filterDirt*.58),production=.022*load+s.food*.16;
  const convert=Math.min(s.ammonia+h*production,s.bacteria*.16*efficiency*h),convert2=Math.min(s.nitrite+convert*.8,s.bacteria*.14*efficiency*h);
  s.ammonia=Math.max(0,s.ammonia+production*h-convert);s.nitrite=Math.max(0,s.nitrite+convert*.8-convert2);s.nitrate=Math.max(0,s.nitrate+convert2*3.2-s.plants*.005*(.55+s.plantGrowth*.45)*light*h);
- s.bacteria=clamp(s.bacteria+h*.008,0,1.2+s.filter*.12);s.food=Math.max(0,s.food-h*(.08+s.crewEnergy*.035));
+ s.bacteria=clamp(s.bacteria+h*.008,0,1.2+s.filter*.12);s.food=Math.max(0,s.food-h*(.08+s.crewEnergy*.035*(s.ecology.colony.length/13)));
  s.oxygen=clamp(s.oxygen+h*((7.7-s.oxygen)*(.35+s.aerator*.22)+s.plants*.014*light-.12*load-s.food*.15),2,9);
- s.algae=clamp(s.algae+h*(light*.012+s.nitrate*.0003-.007-s.plants*.0005-s.crewEnergy*.002),0,1);
- s.crewEnergy=clamp(s.crewEnergy+h*(s.algae>.04||s.food>.04?.018:-.008),.1,1);
+ s.algae=clamp(s.algae+h*(light*.012+s.nitrate*.0003-.007-s.plants*.0005-s.crewEnergy*.002*(s.ecology.colony.length/13)),0,1);
+
  s.plantGrowth=clamp(s.plantGrowth+h*(light?(s.nitrate>1?.022:.009):-.002),0,1);
  s.ph=clamp(s.ph+(6.9-s.ph)*h*.03-s.food*h*.001,5.8,8);
- const quality=harmony(s);if(quality>80){s.wonder+=h*(3.2+s.observed.length*.04);s.healthy+=seconds*speed;}
+ const quality=harmony(s);advanceEcology(s,h,quality,!!light);if(quality>80){s.wonder+=h*(3.2+s.observed.length*.04);s.healthy+=seconds*speed;}
  const schools=[0,0,0,0];for(const f of s.fish)schools[f.type]!++;
  for(const f of s.fish){f.hunger=clamp(f.hunger+h*.035,0,1);const desired=clamp(100-comfort(s,f,schools)-f.bond*.04+Math.max(0,75-quality)*.6+Math.max(0,f.hunger-.7)*35,0,100);f.stress=clamp(f.stress+(desired-f.stress)*Math.min(1,h*.22),0,100);f.health=clamp(f.health+h*(quality>65?.15:-.4),12,100);f.growth=clamp(f.growth+h*(quality>75&&f.hunger<.7?.014:.003),.3,1);}
  if(quality>=85)s.project.calm+=h;
@@ -161,13 +166,15 @@ export function advance(s:Aquarium,seconds:number,speed:number){
 }
 
 export function swim(s:Aquarium,dt:number,t:number){
- for(let i=s.pellets.length-1;i>=0;i--){const p=s.pellets[i];p.age+=dt;p.y=Math.max(.25,p.y-dt*foods[p.kind].sink);if(p.kind==='greens'&&p.y<.5){s.crewEnergy=clamp(s.crewEnergy+dt*.02,0,1);p.age+=dt*.8;}if(p.age>(p.kind==='greens'?70:45)){s.food+=p.kind==='greens'?.025:.04;s.pellets.splice(i,1);}}
+ for(let i=s.pellets.length-1;i>=0;i--){const p=s.pellets[i];p.age+=dt;p.y=Math.max(.25,p.y-dt*foods[p.kind].sink);if(p.kind==='greens'&&p.y<.5){for(const n of s.ecology.colony)if(n.type<4)n.energy=clamp(n.energy+dt*.02,0,1);s.crewEnergy=clamp(s.crewEnergy+dt*.02,0,1);p.age+=dt*.8;}if(p.age>(p.kind==='greens'?70:45)){s.food+=p.kind==='greens'?.025:.04;s.pellets.splice(i,1);}}
  for(const f of s.fish){const p=species[f.type];let ax=-f.x*.025,ay=(p.zone+Math.sin(t*.28+f.phase)*.5-f.y)*.24,az=-f.z*.06;let nearest:Pellet|undefined;let best=100;
   if(f.hunger>.12)for(const pellet of s.pellets){if(pellet.kind==='greens'&&f.hunger<.8)continue;const preference=pellet.kind===p.food?1:2.8;const d=preference*((pellet.x-f.x)**2+(pellet.y-f.y)**2+(pellet.z-f.z)**2);if(d<best){best=d;nearest=pellet;}}
   if(nearest&&best<70){ax+=(nearest.x-f.x)*.7;ay+=(nearest.y-f.y)*.7;az+=(nearest.z-f.z)*.7;if(best<.16){const n=s.pellets.indexOf(nearest);if(n>=0)s.pellets.splice(n,1);f.hunger=Math.max(0,f.hunger-.22);f.bond=clamp(f.bond+(nearest.kind===p.food?3:1),0,100);f.meals++;s.wonder+=.16;}}
   else {ax+=Math.sin(t*.37+f.phase)*.12;az+=Math.cos(t*.24+f.phase)*.13+(1.6-f.z)*.018*f.bond/100;}
   for(const g of s.fish){if(g===f)continue;const dx=g.x-f.x,dy=g.y-f.y,dz=g.z-f.z;const d=dx*dx+dy*dy+dz*dz;if(d<.38&&d>.001){ax-=dx/(d+.1)*.22;ay-=dy/(d+.1)*.2;az-=dz/(d+.1)*.22;}else if(g.type===f.type&&p.school&&d<12&&!nearest){ax+=dx*.012+(g.vx-f.vx)*.08;ay+=dy*.01;az+=dz*.012+(g.vz-f.vz)*.08;}}
   if(Math.abs(f.x)>5.8)ax-=Math.sign(f.x)*(Math.abs(f.x)-5.8)*1.5;if(Math.abs(f.z)>2.2)az-=Math.sign(f.z)*(Math.abs(f.z)-2.2)*1.5;if(f.y>5.3)ay-=(f.y-5.3)*2;if(f.y<.4)ay+=(.4-f.y)*2;
+  // Low refuges are obstacles for bottom foragers, with open water above.
+  for(let i=0;i<s.ecology.habitats.length;i++)if(s.ecology.habitats[i]!.kind==='cave'&&f.y<1.1){const b=habitatPositions[i]!,dx=f.x-b.x,dz=f.z-b.z;if(dx*dx+dz*dz<.85){ax+=dx*.7;az+=dz*.7;ay+=.15;}}
   // The large central stones are steering obstacles, not invisible swim-throughs.
   const ox=f.x-.4,oz=f.z+.4;const od=ox*ox+oz*oz;if(f.y<1.8&&od<2.1){ax+=ox*.7;az+=oz*.7;ay+=.3;}
   f.vx+=ax*dt;f.vy+=ay*dt;f.vz+=az*dt;const v=Math.sqrt(f.vx*f.vx+f.vy*f.vy+f.vz*f.vz);const cap=p.speed*(nearest?1.8:1.1)*(1-f.stress*.002);if(v>cap){f.vx*=cap/v;f.vy*=cap/v;f.vz*=cap/v;}if(v<.12)f.vx+=.1*dt;f.x=clamp(f.x+f.vx*dt,-6.5,6.5);f.y=clamp(f.y+f.vy*dt,.28,5.6);f.z=clamp(f.z+f.vz*dt,-2.65,2.65);

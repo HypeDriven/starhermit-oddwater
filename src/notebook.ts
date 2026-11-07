@@ -1,8 +1,10 @@
 import * as draw from 'starhermit:draw';
 import * as ui from 'starhermit:ui';
 import {foods,species,guide,harmony,advice,projectInfo,milestoneList,nurseryNeeds} from './simulation.js';
+import {habitats,neighbours,fieldNotes,broodNeeds} from './ecology.js';
+import type {HabitatKind} from './ecology.js';
 import type {Aquarium,FoodKind} from './simulation.js';
-export const notebook={open:false,tab:0,page:0,care:0,nurseryType:0};
+export const notebook={open:false,tab:0,page:0,care:0,nurseryType:0,habitat:0,bed:0};
 export interface NotebookActions{act:(action:string,value?:string|number)=>void;find:(key:string)=>void;}
 export function drawNotebook(s:Aquarium,w:number,h:number,scale:number,actions:NotebookActions){
  if(!notebook.open)return;
@@ -17,13 +19,13 @@ export function drawNotebook(s:Aquarium,w:number,h:number,scale:number,actions:N
   if(line)text(line,a,b+row*(size+6),size,color);return (row+1)*(size+6);
  };
  const button=(id:string,label:string,a:number,b:number,width:number,selected=false)=>{
-  let clicked=false;ui.area({x:a*scale,y:b*scale,width:width*scale,height:52*scale},()=>{clicked=ui.id('notebook-'+id).style('small').button(label,{selected});});return clicked;
+  let clicked=false;ui.area({x:a*scale,y:b*scale,width:width*scale,height:52*scale},()=>{clicked=ui.id('notebook-'+id).style(id.startsWith('tab')?'notebook-tab':'small').button(label,{selected});});return clicked;
  };
  box(0,78,w,h-78,'#03110db0');box(x,y,bw,bh,'#102f2bfc',15);
  text('THE KEEPER’S NOTEBOOK',x+18,y+17,compact?16:23,lime);
  if(button('close','×',x+bw-52,y+10,36)){notebook.open=false;return;}
- const tabs=['Care','Goals','Guide','Log'],tw=(bw-36)/4;
- for(let i=0;i<4;i++)if(button('tab'+i,tabs[i]!,x+18+i*tw,y+48,tw-5,notebook.tab===i)){notebook.tab=i;notebook.page=0;}
+ const tabs=['Care','Goals','Guide','Log','Habitat'],tw=(bw-36)/5;
+ for(let i=0;i<5;i++)if(button('tab'+i,tabs[i]!,x+18+i*tw,y+48,tw-5,notebook.tab===i)){notebook.tab=i;notebook.page=0;}
  const left=x+20,top=y+104,contentW=bw-40,bottom=y+bh-82;
  const pages=(total:number,perPage:number)=>{
   const max=Math.max(1,Math.ceil(total/perPage));notebook.page=Math.min(notebook.page,max-1);
@@ -98,13 +100,45 @@ export function drawNotebook(s:Aquarium,w:number,h:number,scale:number,actions:N
    wrap(g.detail,left,yy+28,contentW-(compact?0:110),11);
    if(button('find-'+g.key,seen?'Visit':'Observe +3',left+contentW-110,yy+(compact?58:25),110))actions.find(g.key);
   }
- }else{
+ }else if(notebook.tab===3){
   text('What changed in your aquarium',left,top,18,lime);
   const log=[...s.log].reverse();pages(log.length,4);
   for(let row=0;row<4;row++){
    const entry=log[notebook.page*4+row];if(!entry)break;const yy=top+38+row*87;
    const hour=Math.floor(entry.hour%24);text(`DAY ${Math.floor(entry.hour/24)+1} · ${String(hour).padStart(2,'0')}:00`,left,yy,10,gold);
    wrap(entry.text,left,yy+20,contentW,11);
+  }
+ }else{
+  const labels=['Layout','Colony','Field notes'];
+  for(let i=0;i<3;i++)if(button('habitat-tab'+i,labels[i]!,left+i*contentW/3,top-4,contentW/3-5,notebook.habitat===i)){notebook.habitat=i;notebook.page=0;}
+  const cy=top+57,e=s.ecology;
+  if(notebook.habitat===0){
+   text('Small places, different lives',left,cy,compact?16:20,lime);
+   for(let i=0;i<3;i++)if(button('bed'+i,['Left bed','Middle bed','Right bed'][i]!,left+i*contentW/3,cy+33,contentW/3-5,notebook.bed===i))notebook.bed=i;
+   const bed=e.habitats[notebook.bed]!,p=habitats[bed.kind];
+   text(p.name+(bed.kind==='moss'?` · ${Math.round(bed.maturity*100)}% mature`:bed.kind==='leaves'?` · ${Math.round(bed.maturity*100)}% remaining`:''),left,cy+89,15,gold);
+   wrap(p.detail,left,cy+116,contentW,12);
+   const kinds:HabitatKind[]=['moss','leaves','cave','bare'];
+   for(let i=0;i<4;i++){const kind=kinds[i]!,item=habitats[kind];if(button('habitat-'+kind,(compact?['Moss','Leaves','Refuge','Open gravel'][i]:item.name)+(item.cost?' · '+item.cost+' W':''),left+(i%2)*contentW/2,cy+186+Math.floor(i/2)*57,contentW/2-5))actions.act('habitat',notebook.bed+':'+kind);}
+   wrap('Choose a bed, then place a habitat. Replacing costs its full price. Low leaf litter can be renewed; mature moss keeps growing.',left,cy+316,contentW,11);
+  }else if(notebook.habitat===1){
+   text('A living clean-up crew',left,cy,18,lime);
+   const shrimp=e.colony.filter(n=>n.type<2).length;
+   text(`${shrimp} / 13 shrimp · ${e.born} raised · ${e.moults} moults`,left,cy+30,12,gold);
+   const need=broodNeeds(s,harmony(s));
+   wrap(e.brood?`Cherry brood: ${e.brood.hours.toFixed(1)} / 16 settled hours. `+(e.brood.ready?'Shrimplets are ready.':need||'Safe in the moss.'):need||'Moss and water are ready for a cherry shrimp brood.',left,cy+55,contentW,11);
+   if(button('brood',e.brood?.ready?'Welcome shrimplets':e.brood?'Brood developing':'Shelter brood · 12 W',left,cy+119,contentW/2-5))actions.act(e.brood?.ready?'welcome-shrimp':'brood');
+   if(button('share','Share two adults',left+contentW/2+5,cy+119,contentW/2-5))actions.act('share-shrimp');
+   pages(e.colony.length,2);
+   for(let row=0;row<2;row++){const n=e.colony[notebook.page*2+row];if(!n)break;const yy=cy+185+row*80;
+    text(neighbours[n.type]!.name+' #'+(n.id+1),left,yy,compact?13:16,lime);
+    text((n.growth<.95?'Young · '+Math.round(n.growth*100)+'% grown':'Adult')+' · energy '+Math.round(n.energy*100)+'%',left,yy+25,11,muted);
+    if(button('watch'+n.id,'Watch',left+contentW-85,yy+4,85))actions.find('resident-'+n.id);
+   }
+  }else{
+   text(`Patient fieldwork · ${e.notes.length} / 4`,left,cy,18,lime);
+   text('Watch a resident, then record its behavior. +5 Wonder each.',left,cy+31,compact?10:12,muted);
+   for(let i=0;i<fieldNotes.length;i++){const f=fieldNotes[i]!,yy=cy+66+i*72; text((e.notes.includes(f.id)?'✓ ':'○ ')+f.title,left,yy,compact?13:16,lime);wrap(f.hint,left,yy+24,contentW,11);}
   }
  }
  text(`${Math.floor(s.wonder)} Wonder · ${Math.round(harmony(s))}% harmony`,left,y+bh-23,10,muted);

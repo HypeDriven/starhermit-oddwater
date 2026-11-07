@@ -1,0 +1,30 @@
+package=Directory files=51 bytes=15448974 name="Oddwater" api=1 entry=src/main.ts capabilities=storage actions=feed,change,plant,dream,pause,help,options,notebook,target_feed
+limits=Limits { fuel_ms: 32, heap_bytes: 268435456, call_frames: 1024, wasm_bytes: 268435456, gpu_bytes: 2147483648, meshes: 4096, instanced_meshes: 1024, mesh_bytes: 130023424, image_bytes: 268435456, images: 120, audio_clips: 128, audio_bytes: 134217728, voices: 256, storage_value_bytes: 1048576, storage_bytes: 67108864 }
+left out: 9 paths by 9 rules (--verbose lists them)
+  .starhermitignore line 1: README.md: 1 (README.md)
+  .starhermitignore line 2: spec.md: 1 (spec.md)
+  .starhermitignore line 3: publication.json: 1 (publication.json)
+  .starhermitignore line 4: tools/: 1 (tools/)
+  .starhermitignore line 5: tests/: 1 (tests/)
+  .starhermitignore line 6: coverart.png: 1 (coverart.png)
+  .starhermitignore line 7: art/: 1 (art/)
+  default rule package.json: 1 (package.json)
+  default rule tsconfig.json: 1 (tsconfig.json)
+web=linked modules=16
+runnable=true engine="TypeScript" frames=120 probes=0
+PASS package src/main.ts: valid; 120 frames headless
+play_script frames=7586 saved=ecology-layout:3067,ecology-brood:2878,ecology-young:2918,ecology-observation:20368,ecology-notes:2724,ecology-shared:2886,ecology-next-generation:2859 objects=1296 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=17.3MiB budget=256.0MiB share=7% quality=quantum
+runtime_render game_frames=5 runs=true objects=1296 skipped=0 distinct_colors=2848 screens=options:0.000/951 not-responding:0.000/1169 files:0.000/928 permission:0.000/624 error:0.000/880 stopped:0.000/1010 microphone=[229, 72, 77] capture_png=152532
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS ecology
+play_script frames=72 saved=habitat-phone-layout:1714,habitat-phone-colony:1668,habitat-phone-notes:1555 objects=1297 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=17.3MiB budget=256.0MiB share=7% quality=quantum
+runtime_render game_frames=5 runs=true objects=1297 skipped=0 distinct_colors=1557 screens=options:0.000/542 not-responding:0.000/823 files:0.000/565 permission:0.000/395 error:0.000/626 stopped:0.000/728 microphone=[229, 72, 77] capture_png=60314
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS ecology-mobile
+play_script frames=72 saved=habitat-phone-layout:1709,habitat-phone-colony:1641,habitat-phone-notes:1487 objects=1297 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=17.3MiB budget=256.0MiB share=7% quality=quantum
+runtime_render game_frames=5 runs=true objects=1297 skipped=0 distinct_colors=1487 screens=options:0.000/542 not-responding:0.000/823 files:0.000/503 permission:0.000/395 error:0.000/626 stopped:0.000/728 microphone=[229, 72, 77] capture_png=55592
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS ecology-small

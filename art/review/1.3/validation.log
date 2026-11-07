@@ -1,0 +1,114 @@
+
+> oddwater@1.3.0 test
+> node --import ./tests/register.mjs tests/simulation.test.mjs && node tests/gravel.test.mjs && node --import ./tests/register.mjs tests/ecology.test.mjs && node tools/check.mjs
+
+✔ a v1 aquarium migrates without losing fish, Wonder, plants, dreams or journal rewards (2.812703ms)
+✔ new progression, juvenile growth and nursery progress survive a save round trip (1.003303ms)
+✔ food choice changes sinking rate, and reaching the food increases trust (0.898047ms)
+✔ the food cap refuses extra portions without advancing meal or project counters (0.13253ms)
+✔ filter and air upgrades spend Wonder and improve their actual ecosystem functions (1.010397ms)
+✔ a careful filter rinse restores flow while retaining bacteria (0.192ms)
+✔ mature stems provide a limited supply of free plants (0.223439ms)
+✔ the nursery enforces habitat, school and water prerequisites before charging (0.419639ms)
+✔ nursery development pauses in poor water, then produces exactly two growing juveniles (3.428271ms)
+✔ observations, milestones and projects cannot be claimed repeatedly (0.567569ms)
+✔ social schools and plant shelter affect comfort and stress (0.28297ms)
+✔ light schedules have real nights, and paused time does not progress care (0.300449ms)
+✔ capacity constraints keep purchases and nurseries within tank limits (0.158569ms)
+✔ long simulated care stays finite and preserves water-change dilution (10.121301ms)
+✔ rehoming makes space, preserves a social group and keeps new fish IDs distinct (0.642429ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 28.309523
+✔ voxel bed settles into finite, bounded pebble positions (23.387096ms)
+✔ a local water disturbance moves nearby stones and wakes a sleeping bed (10.517783ms)
+✔ the collision lattice contains each pebble after settling (5.703144ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 44.246012
+✔ habitats charge only successful changes and leaf litter can be renewed when depleted (1.532607ms)
+✔ moss grows, leaves decay and feed real residents; pause freezes the whole ecology (4.166463ms)
+✔ a wafer restores persistent resident energy, which survives reload (2.190271ms)
+✔ shrimp moult on simulated time and their recovery changes activity and field notes (1.495196ms)
+✔ broods require mature moss, reserve capacity, pause in poor water, and produce exactly two young (3.980473ms)
+✔ sharing keeps four adult cherry shrimp and distinct IDs for later generations (0.806468ms)
+✔ fieldwork requires the actual behavior and cannot repeat its reward (0.686709ms)
+✔ legacy saves acquire the original crew; ecology restoration bounds bad values and duplicate IDs (1.237593ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 21.347865
+package=Directory files=51 bytes=15448830 name="Oddwater" api=1 entry=src/main.ts capabilities=storage actions=feed,change,plant,dream,pause,help,options,notebook,target_feed
+limits=Limits { fuel_ms: 32, heap_bytes: 268435456, call_frames: 1024, wasm_bytes: 268435456, gpu_bytes: 2147483648, meshes: 4096, instanced_meshes: 1024, mesh_bytes: 130023424, image_bytes: 268435456, images: 120, audio_clips: 128, audio_bytes: 134217728, voices: 256, storage_value_bytes: 1048576, storage_bytes: 67108864 }
+left out: 9 paths by 9 rules (--verbose lists them)
+  .starhermitignore line 1: README.md: 1 (README.md)
+  .starhermitignore line 2: spec.md: 1 (spec.md)
+  .starhermitignore line 3: publication.json: 1 (publication.json)
+  .starhermitignore line 4: tools/: 1 (tools/)
+  .starhermitignore line 5: tests/: 1 (tests/)
+  .starhermitignore line 6: coverart.png: 1 (coverart.png)
+  .starhermitignore line 7: art/: 1 (art/)
+  default rule package.json: 1 (package.json)
+  default rule tsconfig.json: 1 (tsconfig.json)
+web=linked modules=16
+runnable=true engine="TypeScript" frames=120 probes=0
+PASS package src/main.ts: valid; 120 frames headless
+play_script frames=99 saved=desktop-options:63826,desktop:63999 objects=2230 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=21.3MiB budget=256.0MiB share=8% quality=molecular
+runtime_render game_frames=5 runs=true objects=2230 skipped=0 distinct_colors=63895 screens=options:0.000/951 not-responding:0.000/1169 files:0.000/928 permission:0.000/624 error:0.000/880 stopped:0.000/1010 microphone=[229, 72, 77] capture_png=725444
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS balanced: desktop
+play_script frames=74 saved=mobile:2555,mobile-options:2559 objects=1285 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=17.3MiB budget=256.0MiB share=7% quality=quantum
+runtime_render game_frames=5 runs=true objects=1285 skipped=0 distinct_colors=2563 screens=options:0.000/542 not-responding:0.000/823 files:0.000/565 permission:0.000/395 error:0.000/626 stopped:0.000/728 microphone=[229, 72, 77] capture_png=69325
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS low: mobile
+play_script frames=153 saved=notebook-nursery:3641,notebook-goals:3649,notebook-observation:60414,notebook-renamed:59983,notebook-rehoming:64178 objects=2219 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=21.3MiB budget=256.0MiB share=8% quality=molecular
+runtime_render game_frames=5 runs=true objects=2219 skipped=0 distinct_colors=64168 screens=options:0.000/951 not-responding:0.000/1169 files:0.000/928 permission:0.000/624 error:0.000/880 stopped:0.000/1010 microphone=[229, 72, 77] capture_png=718077
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS balanced: notebook
+play_script frames=53 saved=notebook-phone-meals:1762,notebook-phone-equipment:1843,notebook-phone-nursery:1715,notebook-phone-goals:1622,notebook-phone-guide:1645,notebook-phone-log:1468 objects=1277 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=17.3MiB budget=256.0MiB share=7% quality=quantum
+runtime_render game_frames=5 runs=true objects=1277 skipped=0 distinct_colors=1468 screens=options:0.000/542 not-responding:0.000/823 files:0.000/565 permission:0.000/395 error:0.000/626 stopped:0.000/728 microphone=[229, 72, 77] capture_png=43308
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS low: notebook-mobile
+play_script frames=1661 saved=progression-eggs:2964,progression-juveniles:2739,progression-goals:3038 objects=1296 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=17.3MiB budget=256.0MiB share=7% quality=quantum
+runtime_render game_frames=5 runs=true objects=1296 skipped=0 distinct_colors=3037 screens=options:0.000/951 not-responding:0.000/1169 files:0.000/928 permission:0.000/624 error:0.000/880 stopped:0.000/1010 microphone=[229, 72, 77] capture_png=148962
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS low: progression
+play_script frames=3954 saved=ecology-layout:3104,ecology-brood:2879,ecology-young:2913,ecology-observation:19605,ecology-notes:2701 objects=1388 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=17.3MiB budget=256.0MiB share=7% quality=quantum
+runtime_render game_frames=5 runs=true objects=1388 skipped=0 distinct_colors=2697 screens=options:0.000/951 not-responding:0.000/1169 files:0.000/928 permission:0.000/624 error:0.000/880 stopped:0.000/1010 microphone=[229, 72, 77] capture_png=156196
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS low: ecology
+play_script frames=72 saved=habitat-phone-layout:1709,habitat-phone-colony:1667,habitat-phone-notes:1550 objects=1297 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=17.3MiB budget=256.0MiB share=7% quality=quantum
+runtime_render game_frames=5 runs=true objects=1297 skipped=0 distinct_colors=1551 screens=options:0.000/542 not-responding:0.000/823 files:0.000/565 permission:0.000/395 error:0.000/626 stopped:0.000/728 microphone=[229, 72, 77] capture_png=61464
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS low: ecology-mobile
+play_script frames=103 saved=remaster-tank:63447,remaster-sound:63052,remaster-fed:61318,remaster-water:63417,remaster-night:32892 objects=3753 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=55.5MiB budget=256.0MiB share=22% quality=terrestrial
+runtime_render game_frames=5 runs=true objects=3753 skipped=0 distinct_colors=32766 screens=options:0.000/951 not-responding:0.000/1169 files:0.000/928 permission:0.000/624 error:0.000/880 stopped:0.000/1010 microphone=[229, 72, 77] capture_png=559143
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS high: remaster
+play_script frames=167 saved=graphics:48582 objects=3808 game_thread p50=13.04ms p95=25.56ms p99=33.44ms max=37.12ms n=122 draw p50=300.29ms p95=374.53ms p99=440.97ms max=3973.99ms n=122 draw_parts_p50 scene=0.34ms pass=295.57ms overlay=5.35ms timed_draws=0 gpu_per_frame=431.24ms shadows=65.91ms scene=295.39ms occlusion=44.24ms bloom=17.53ms post=3.47ms anti_aliasing=0.00ms overlay=4.17ms uploads=0.53ms
+images peak=80.1MiB budget=256.0MiB share=31% quality=galactic
+runtime_render game_frames=5 runs=true objects=3808 skipped=0 distinct_colors=48464 screens=options:0.000/951 not-responding:0.000/1169 files:0.000/928 permission:0.000/624 error:0.000/880 stopped:0.000/1010 microphone=[229, 72, 77] capture_png=525284
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
+PASS ultra: graphics

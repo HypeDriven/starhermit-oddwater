@@ -12,7 +12,7 @@ Healthy fish earn **Wonder**. Complete the keeper's journal, welcome new fish gr
 
 The scene includes a voxel collision simulation for 3,000 pebbles, swaying translucent leaves, textured driftwood and rocks, and the StarHermit engine’s GPU FFT water, focused caustics, planar reflections, refraction and light shafts on High/Ultra. Fresnel-shaded filter bubbles rise and wobble before sending ripples across the surface.
 
-Seven cherry/Amano shrimp, three nerite/ramshorn snails and three small aquatic insects browse the tank. Click them to inspect them. Water changes and clicking empty gravel disturb the substrate.
+The tank starts with seven cherry/Amano shrimp, three nerite/ramshorn snails and three small aquatic insects. Their energy, growth and shrimp moult cycles persist alongside the fish. Click them to inspect them. Water changes and clicking empty gravel disturb the substrate.
 
 Turn Sound on for MOSS aquarium ambience and care sounds, plus a 90-second YuE instrumental track. The engine’s Options controls music and effects volume. Existing aquarium saves remain compatible.
 
@@ -24,6 +24,8 @@ Mature stems yield cuttings for free planting. With 11 plants, improved filtrati
 
 Fish can be renamed in their inspection card. Rehoming requires confirmation and keeps minimum social groups together, leaving room for later generations. Existing aquariums migrate automatically without losing their fish, Wonder, plants, dreams or journal rewards.
 
+Open **Habitat** in the notebook to arrange three small beds: growing moss, decomposing leaf litter, permanent pebble refuges or open gravel. Residents seek their preferred feeding and resting places. Mature moss and settled water support cherry shrimp broods; welcome the shrimplets, watch them grow, and share extra adults while keeping four breeders. Patient observation earns four behavior field notes: meals, night rest, moulting and young.
+
 ## Controls
 
 | Action | Control |
@@ -32,7 +34,7 @@ Fish can be renamed in their inspection card. Rehoming requires confirmation and
 | Zoom | Mouse wheel; + / − buttons on phones |
 | Inspect a fish | Click or tap it |
 | Feed the selected food | F or Feed button |
-| Keeper notebook: care, goals, guide and log | J or Notebook button |
+| Keeper notebook: care, habitats, goals, guide and log | J or Notebook button |
 | Change 30% of the water | W or Water change button |
 | Plant | P or Plant button; costs 8 Wonder |
 | Awaken a dream | D or Dream button |
@@ -84,18 +86,20 @@ npx --package typescript tsc -p .
 
 ## Source
 
+- `src/ecology.ts` — persistent microhabitats, resident growth, moults, shrimp broods and behavior discoveries.
+- `src/habitats.ts` — visible moss, leaf litter and refuges.
 - `src/simulation.ts` — aquarium chemistry, fish state, food and schooling movement.
 - `src/main.ts` — scene geometry, materials, fish animation, input, HUD, care tools, journal, fish shop, dreams, audio and saves.
 - `starhermit.txt` — engine pin, entry module, capabilities and action bindings.
 - `index.html` and `starhermit-files.json` — official web loader and generated package index.
 
-The nitrogen cycle is a forgiving, accelerated game approximation. Species are procedural models; temperature is maintained at 25 °C by the simulated heater. Purchases use earned in-game Wonder. Progress is stored locally; this build does not provide online multiplayer or cloud saves.
+The nitrogen cycle is a forgiving, accelerated game approximation. Fish use generated textured models; invertebrates are procedural. temperature is maintained at 25 °C by the simulated heater. Purchases use earned in-game Wonder. Progress is stored locally; this build does not provide online multiplayer or cloud saves.
 
 ## Validation
 
 The original playable build passed the official engine's 120-frame package check, strict TypeScript checking, native Vulkan rendering and scripted 1440×900 desktop / 390×844 mobile feeding, journal reward and dream-unlock interactions. Model checks covered 30 simulated hours, fish bounds, overfeeding penalties, water-change dilution and pellet consumption/expiration.
 
-The 1.2 gameplay update adds save-migration and ecosystem tests, and a complete scripted project-to-nursery playthrough. It retains strict TypeScript, the official package check, voxel-physics checks and native rendering checks at Low, Balanced, High and Ultra. Desktop and phone browser startup are checked against the packaged game; generated models, sound, water interaction and resident purchases are also exercised. See [spec.md](spec.md) for the release record.
+The gameplay updates add habitat, colony, behavior, save-migration and ecosystem tests, and a complete scripted project-to-nursery playthrough. It retains strict TypeScript, the official package check, voxel-physics checks and native rendering checks at Low, Balanced, High and Ultra. Desktop and phone browser startup are checked against the packaged game; generated models, sound, water interaction and resident purchases are also exercised. See [spec.md](spec.md) for the release record.
 
 ## Publish
 

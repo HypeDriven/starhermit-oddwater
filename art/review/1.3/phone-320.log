@@ -1,0 +1,4 @@
+play_script frames=72 saved=habitat-phone-layout:1648,habitat-phone-colony:1577,habitat-phone-notes:1420 objects=1297 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=17.3MiB budget=256.0MiB share=7% quality=quantum
+runtime_render game_frames=5 runs=true objects=1297 skipped=0 distinct_colors=1419 screens=options:0.000/542 not-responding:0.000/823 files:0.000/503 permission:0.000/395 error:0.000/626 stopped:0.000/728 microphone=[229, 72, 77] capture_png=55088
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone

@@ -1,0 +1,62 @@
+# viewport 1440x900
+until 1200 ODDWATER
+frames 20
+key KeyJ 2
+click Habitat
+expect Small places, different lives
+click Moss garden · 12 W
+frames 2
+expect Moss garden placed
+click Middle bed
+click Leaf litter · 6 W
+frames 2
+expect Leaf litter placed
+save ecology-layout
+click Colony
+expect 7 / 13 shrimp
+click Shelter brood · 12 W
+frames 2
+expect Grow a moss bed
+key KeyJ 2
+click 20×
+frames 1800
+key KeyJ 2
+click Colony
+click Shelter brood · 12 W
+frames 2
+expect Cherry brood
+save ecology-brood
+key KeyJ 2
+frames 2000
+key KeyJ 2
+click Welcome shrimplets
+frames 2
+expect 9 / 13 shrimp
+save ecology-young
+click ←
+frames 2
+expect Cherry shrimp #15
+click Watch
+frames 2
+expect Growing among the moss
+click Record behavior
+frames 2
+expect Behavior recorded
+save ecology-observation
+key KeyJ 2
+click Field notes
+expect Patient fieldwork
+save ecology-notes
+click Colony
+key KeyJ 2
+frames 3600
+key KeyJ 2
+click Share two adults
+frames 2
+expect 7 / 13 shrimp
+expect Two grown shrimp shared
+save ecology-shared
+click Shelter brood · 12 W
+frames 2
+expect Cherry brood
+save ecology-next-generation

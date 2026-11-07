@@ -1,0 +1,23 @@
+# viewport 320x844
+until 1200 ODDWATER
+frames 20
+touch Notebook
+touch Habitat
+expect Small places, different lives
+touch Moss · 12 W
+frames 2
+expect Moss garden placed
+save habitat-phone-layout
+touch Colony
+expect A living clean-up crew
+save habitat-phone-colony
+touch Watch
+frames 2
+expect Cherry shrimp
+touch Record behavior
+frames 2
+key KeyJ 2
+touch Habitat
+touch Field notes
+expect Patient fieldwork
+save habitat-phone-notes

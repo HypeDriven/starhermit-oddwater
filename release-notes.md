@@ -1,13 +1,11 @@
-# 1.2 — The keeper’s notebook
+# 1.3 — Small worlds
 
-Open **Notebook** (or press **J**) to give your aquarium a longer story.
+The clean-up crew has a life of its own. Open **Notebook → Habitat**.
 
-- Choose flakes, sinking pellets or algae wafers. Different residents reach and prefer different meals; wafers support the clean-up crew. Place a meal directly in the tank when you want to feed a particular area.
-- Upgrade the biological filter and air return, rinse the sponge, and choose a 6–12 hour light period. Flow, oxygen, plant growth and algae respond to your decisions.
-- Trim mature stems into free cuttings and grow a self-sustaining planted tank.
-- Prepare a sheltered nursery, keep the water calm while eggs develop, then welcome and raise two juveniles.
-- Get to know named fish, build their trust through feeding, and record all ten species in the field guide.
-- Complete repeating keeper projects and seven permanent milestones. A dated tank log remembers your aquarium’s story.
-- Rehome fish with another keeper when you need space. A confirmation protects named neighbours, and minimum social groups stay together.
+- Arrange three beds with growing moss, slowly decomposing leaf litter, permanent pebble refuges or open gravel. Residents seek suitable food and cover.
+- Shrimp keep their energy, growth and moult cycles. Watch them recover in shelter and browse sunken wafers; snails and nymphs rest during the real tank night.
+- Mature moss and calm water support cherry shrimp broods. Welcome two shrimplets, watch them grow, then share extra adults to make room for later broods. The colony keeps at least four adult cherry shrimp.
+- Discover four behavior field notes through patient observation. Visit a resident from the Colony page, then choose Record behavior during a meal, night rest, moult or juvenile stage.
+- Two new milestones reward raising a thriving colony and completing those field notes. Your habitat choices, residents and brood progress save automatically.
 
-Existing saves migrate automatically. The new pages work on desktop and phones; all previous care tools and dreams remain available.
+Existing aquariums keep their fish and progress, and gain the original clean-up crew as persistent residents. Amano shrimp and nerite snails do not breed in this freshwater tank.

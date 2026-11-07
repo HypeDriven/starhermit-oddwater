@@ -37,6 +37,7 @@ try{
   // Asset and clip preparation is asynchronous; the game must become visible without any gesture.
   await page.waitForTimeout(8000);
   const initial=await page.screenshot({path:join(shots,`${name}-initial.png`),timeout:60000});
+  if(await page.evaluate(()=>document.documentElement.dataset.starhermit)!=='running')throw new Error(name+' game failed to start: '+await page.locator('body').innerText());
   if(initial.length<width*height*dpr*dpr*.015)problems.push('Blank aquarium before first input');
   if(name==='desktop'){
    await page.mouse.click(width-150,40); // Sound on: unlock and start background audio.
@@ -65,6 +66,14 @@ try{
   await clickButton(/^(Plants & nursery|Nursery)$/);
   await page.getByRole('button',{name:/Prepare nursery/}).waitFor({state:'attached',timeout:10000});
   await page.screenshot({path:join(shots,`${name}-notebook-nursery.png`),timeout:60000});
+  await clickButton('Habitat');
+  await clickButton(/^(Moss|Moss garden) · 12 W$/);
+  await page.getByRole('button',{name:'Colony',exact:true}).waitFor({state:'attached',timeout:10000});
+  await page.screenshot({path:join(shots,`${name}-habitat-layout.png`),timeout:60000});
+  await clickButton('Colony');
+  await page.screenshot({path:join(shots,`${name}-habitat-colony.png`),timeout:60000});
+  await clickButton('Field notes');
+  await page.screenshot({path:join(shots,`${name}-habitat-notes.png`),timeout:60000});
   for(const label of ['Goals','Guide','Log']){
    await clickButton(label);
    await page.screenshot({path:join(shots,`${name}-notebook-${label.toLowerCase()}.png`),timeout:60000});
