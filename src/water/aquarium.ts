@@ -142,9 +142,10 @@ export class AquariumWater{
   this.material.uniforms.fft!.value=quality==='low'||quality==='balanced'?0:1;
   this.material.uniforms.reflectOn!.value=quality==='low'||quality==='balanced'?0:1;
  }
- update(time:number,camera:PerspectiveCamera,daylight:boolean){
+ update(time:number,camera:PerspectiveCamera,daylight:boolean,airLevel=0){
   const dt=Math.max(0,Math.min(.1,time-this.lastTime));this.lastTime=time;waterTime.value=time;sunlight.value=daylight?1:.12;camera.getWorldDirection(this.forward);
   this.pulse=Math.max(0,this.pulse-dt*.6);
+  this.bubbles.count=Math.round(({low:40,balanced:85,high:150,ultra:240}[this.quality])*(.65+Math.min(2,airLevel)*.175));
   const count=this.bubbles.count;
   for(let i=0;i<count;i++){
    const micro=i%4!==0;const speed=micro?.38+(i%9)*.032:.72+(i%7)*.05;

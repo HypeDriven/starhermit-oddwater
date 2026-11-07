@@ -1,0 +1,42 @@
+# viewport 1440x900
+until 1200 ODDWATER
+frames 20
+key KeyJ 2
+click Serve a small meal
+key KeyJ 2
+click Collect +12
+frames 2
+key KeyJ 2
+click Sinking pellets
+click Serve a small meal
+click Algae wafer
+click Serve a small meal
+click Goals
+expect A meal at every depth
+click Collect project reward
+frames 2
+expect The cutting exchange
+click Care
+click Equipment
+click More media
+frames 2
+expect level 2
+click Plants & nursery
+click Plant · 8 Wonder
+click Plant · 8 Wonder
+click Prepare nursery
+frames 2
+expect Neon tetra nursery
+save progression-eggs
+key KeyJ 2
+click 20×
+frames 1500
+key KeyJ 2
+expect Neon tetra nursery
+expect Two juveniles are ready
+click Welcome juveniles
+frames 2
+expect Two juveniles join the school
+save progression-juveniles
+click Goals
+save progression-goals

@@ -7,7 +7,7 @@ for(const [path,{sha256}] of Object.entries(files)){
  if(createHash('sha256').update(readFileSync(path)).digest('hex')!==sha256)throw new Error(`Repackage: ${path} changed`);
 }
 execFileSync(exe,['check','.','--quiet'],{stdio:'inherit',timeout:60000});
-for(const [quality,script] of [['balanced','desktop'],['low','mobile'],['high','remaster'],['ultra','graphics']]){
+for(const [quality,script] of [['balanced','desktop'],['low','mobile'],['balanced','notebook'],['low','notebook-mobile'],['low','progression'],['high','remaster'],['ultra','graphics']]){
  execFileSync(exe,['.','--render-check','--guest','--quality',quality,'--script',`tests/native/${script}.play`],{stdio:'inherit',timeout:240000});
  console.log(`PASS ${quality}: ${script}`);
 }

@@ -48,6 +48,10 @@ export function createFish(fish:Fish):FishVisual{
  const v:FishVisual={root,yaw:0,phase:{value:fish.phase},variants:undefined,fish};
  dress(v,cache.get(active)!);fishVisuals.push(v);return v;
 }
+export function removeFishVisual(id:number){
+ const index=fishVisuals.findIndex(v=>v.fish.id===id);if(index<0)return;
+ const v=fishVisuals[index]!;v.root.parent?.remove(v.root);v.root.traverse(o=>{if(o instanceof Mesh){const mats=Array.isArray(o.material)?o.material:[o.material];for(const m of mats)m.dispose();}});fishVisuals.splice(index,1);
+}
 let changing=false;
 export function updateFishQuality(tier:QualityTier){
  wanted=tier;if(changing||active===tier)return;
@@ -56,7 +60,7 @@ export function updateFishQuality(tier:QualityTier){
 }
 export function animateFish(time:number,paused:boolean){
  for(const v of fishVisuals){const f=v.fish;
-  v.root.position.set(f.x,f.y,f.z);
+  v.root.position.set(f.x,f.y,f.z);v.root.scale.setScalar(species[f.type]!.size*1.42*(.35+.65*f.growth));
   const target=Math.atan2(-f.vz,f.vx);let diff=target-v.yaw;
   while(diff>Math.PI)diff-=Math.PI*2;while(diff< -Math.PI)diff+=Math.PI*2;
   v.yaw+=diff*.09;v.root.rotation.set(0,v.yaw,clamp(f.vy*.4,-.3,.3));

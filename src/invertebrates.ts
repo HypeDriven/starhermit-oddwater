@@ -16,7 +16,7 @@ function spiral(){const vertices:number[]=[],uv:number[]=[],ix:number[]=[];const
  const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(vertices,3));g.setAttribute('uv',new Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();return g;
 }
 const shellGeo=spiral();
-export interface Resident {name:string;detail:string;kind:'snail'|'shrimp'|'insect';root:Group;phase:number;x:number;z:number;angle:number;limbs:Group[];glass:boolean;}
+export interface Resident {name:string;detail:string;kind:'snail'|'shrimp'|'insect';root:Group;phase:number;x:number;z:number;angle:number;limbs:Group[];glass:boolean;activity:string;}
 export class Invertebrates {
  readonly animals:Resident[]=[];
  readonly group=new Group();
@@ -27,7 +27,7 @@ export class Invertebrates {
   for(let i=0;i<3;i++)this.addInsect(i);
  }
  private resident(name:string,detail:string,kind:Resident['kind'],i:number):Resident{
-  const root=new Group();this.group.add(root);const r:Resident={name,detail,kind,root,phase:i*2.399,x:Math.sin(i*3.1+1)*5.8,z:Math.cos(i*4.3)*2.4,angle:i*2.4,limbs:[],glass:false};this.animals.push(r);return r;
+  const root=new Group();this.group.add(root);const r:Resident={name,detail,kind,root,phase:i*2.399,x:Math.sin(i*3.1+1)*5.8,z:Math.cos(i*4.3)*2.4,angle:i*2.4,limbs:[],glass:false,activity:'Exploring'};this.animals.push(r);return r;
  }
  private addSnail(i:number){const r=this.resident(i===0?'Nerite snail':'Ramshorn snail','A tireless algae grazer. Leaves, driftwood and glass are its garden.','snail',i+20);r.glass=i===0;
   part(r.root,snailBody,.015,.045,0,.29,.055,.105);part(r.root,snailBody,.24,.085,0,.10,.075,.075);
@@ -58,7 +58,9 @@ export class Invertebrates {
  update(dt:number,time:number,tank:Aquarium){
   for(const r of this.animals){
    const speed=r.kind==='snail'?.018:r.kind==='shrimp'?.14:.11;
-   r.angle+=Math.sin(time*.19+r.phase)*dt*.45;
+   const meal=tank.pellets.find(p=>p.kind==='greens'&&p.y<1.2);
+   r.activity=meal&&r.kind!=='insect'?'Browsing a wafer':r.kind==='snail'?'Grazing biofilm':r.kind==='shrimp'?(tank.crewEnergy<.3?'Searching for food':'Picking through the gravel'):'Exploring the shallows';
+   if(meal&&!r.glass&&r.kind!=='insect')r.angle=Math.atan2(-(meal.z-r.z),meal.x-r.x);else r.angle+=Math.sin(time*.19+r.phase)*dt*.45;
    r.x+=Math.cos(r.angle)*dt*speed;r.z-=Math.sin(r.angle)*dt*speed;
    if(Math.abs(r.x)>6.5){r.x=Math.sign(r.x)*6.5;r.angle=Math.PI-r.angle;}
    if(Math.abs(r.z)>2.65){r.z=Math.sign(r.z)*2.65;r.angle=-r.angle;}
@@ -69,8 +71,7 @@ export class Invertebrates {
    else {r.root.position.set(r.x,y,r.z);r.root.rotation.set(0,r.angle,0);}
    for(let i=0;i<r.limbs.length;i++){const limb=r.limbs[i]!;if(r.kind==='shrimp'&&i<6)limb.rotation.y=Math.sin(time*5+r.phase-i*.5)*.07;else limb.rotation.z=Math.sin(time*(r.kind==='insect'?7:11)+r.phase+i*.65)*.22;}
   }
-  // Small grazing contribution to the existing ecosystem; no new care burden.
-  tank.algae=Math.max(0,tank.algae-dt*.000004);tank.food=Math.max(0,tank.food-dt*.00001);
+  // Grazing and nutrition are simulated by advance(), independent of render rate.
  }
  pick(x:number,y:number,width:number,height:number,camera:Parameters<Vector3['project']>[0]):Resident|undefined{
   let best=22,hit:Resident|undefined;for(const r of this.animals){const p=r.root.position.clone().project(camera),d=Math.hypot((p.x*.5+.5)*width-x,(-p.y*.5+.5)*height-y);if(d<best){best=d;hit=r;}}return hit;

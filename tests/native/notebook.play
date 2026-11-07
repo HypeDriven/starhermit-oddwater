@@ -1,0 +1,48 @@
+# viewport 1440x900
+until 1200 ODDWATER
+frames 20
+key KeyJ 2
+expect THE KEEPER’S NOTEBOOK
+expect A meal for every neighbour
+click Sinking pellets
+click Serve a small meal
+frames 2
+expect Dinner is served
+click Place food
+click 720 400
+frames 2
+expect A small sprinkle
+key KeyJ 2
+click Equipment
+expect Biological filter
+click More media
+frames 2
+expect level 2
+click Nursery
+expect Stems, shelter
+save notebook-nursery
+click Goals
+expect A meal at every depth
+save notebook-goals
+click Guide
+expect FIELD GUIDE
+click Observe +3
+frames 2
+expect Neon tetra
+save notebook-observation
+click Ripple
+hold ControlLeft
+key KeyA 2
+release ControlLeft
+type River
+frames 2
+expect River
+save notebook-renamed
+click Neon tetra
+click Rehome with another keeper
+frames 2
+expect Confirm rehoming
+click Confirm rehoming
+frames 2
+expect River has a new home
+save notebook-rehoming

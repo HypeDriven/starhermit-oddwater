@@ -15,6 +15,6 @@ click Water change
 frames 30
 expect 30% water changed
 save remaster-water
-click Daylight
+click Light: Auto
 frames 6
 save remaster-night

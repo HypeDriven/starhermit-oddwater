@@ -1,0 +1,16 @@
+# viewport 390x844
+until 1200 ODDWATER
+frames 20
+touch Notebook
+expect THE KEEPER’S NOTEBOOK
+save notebook-phone-meals
+touch Equipment
+save notebook-phone-equipment
+touch Nursery
+save notebook-phone-nursery
+touch Goals
+save notebook-phone-goals
+touch Guide
+save notebook-phone-guide
+touch Log
+save notebook-phone-log

@@ -1,6 +1,6 @@
 # Oddwater — a slightly impossible aquarium
 
-A 3D freshwater aquarium game built directly on **StarHermit Engine 1.38.0**. Keep a planted community tank thriving and spend the Wonder it earns on fish, plants and three small impossibilities.
+A 3D freshwater aquarium game built directly on **StarHermit Engine 1.38.0**. Keep a planted community tank thriving, get to know its residents, grow a nursery, and spend earned Wonder on equipment, fish, plants and three small impossibilities.
 
 ## The aquarium
 
@@ -16,6 +16,14 @@ Seven cherry/Amano shrimp, three nerite/ramshorn snails and three small aquatic 
 
 Turn Sound on for MOSS aquarium ambience and care sounds, plus a 90-second YuE instrumental track. The engine’s Options controls music and effects volume. Existing aquarium saves remain compatible.
 
+## The keeper’s notebook
+
+Open **Notebook** or press **J**. Flakes reach the schools, sinking pellets reach corys, and algae wafers feed shrimp and snails. Use Place food (or T) to choose where a meal lands. Upgrade and rinse the filter, improve aeration, and balance a real day/night light schedule against plant growth and algae.
+
+Mature stems yield cuttings for free planting. With 11 plants, improved filtration, a settled school and calm water, prepare a nursery for 18 Wonder. Eggs need 12 calm tank hours; welcome the juveniles, then watch them grow. Named fish gain trust when fed. Inspect all ten species for the field guide, complete repeating keeper projects and milestones, and read your tank’s dated log.
+
+Fish can be renamed in their inspection card. Rehoming requires confirmation and keeps minimum social groups together, leaving room for later generations. Existing aquariums migrate automatically without losing their fish, Wonder, plants, dreams or journal rewards.
+
 ## Controls
 
 | Action | Control |
@@ -23,7 +31,8 @@ Turn Sound on for MOSS aquarium ambience and care sounds, plus a 90-second YuE i
 | Orbit | Drag the aquarium |
 | Zoom | Mouse wheel; + / − buttons on phones |
 | Inspect a fish | Click or tap it |
-| Feed | F or Feed button |
+| Feed the selected food | F or Feed button |
+| Keeper notebook: care, goals, guide and log | J or Notebook button |
 | Change 30% of the water | W or Water change button |
 | Plant | P or Plant button; costs 8 Wonder |
 | Awaken a dream | D or Dream button |
@@ -86,7 +95,7 @@ The nitrogen cycle is a forgiving, accelerated game approximation. Species are p
 
 The original playable build passed the official engine's 120-frame package check, strict TypeScript checking, native Vulkan rendering and scripted 1440×900 desktop / 390×844 mobile feeding, journal reward and dream-unlock interactions. Model checks covered 30 simulated hours, fish bounds, overfeeding penalties, water-change dilution and pellet consumption/expiration.
 
-The 1.1 remaster passes strict TypeScript, the official 120-frame package check, three voxel-physics tests and native gameplay/rendering checks at Low, Balanced, High and Ultra. Desktop and phone browser startup are checked against the packaged game; generated models, sound, water interaction and resident purchases are also exercised. See [spec.md](spec.md) for the release record.
+The 1.2 gameplay update adds save-migration and ecosystem tests, and a complete scripted project-to-nursery playthrough. It retains strict TypeScript, the official package check, voxel-physics checks and native rendering checks at Low, Balanced, High and Ultra. Desktop and phone browser startup are checked against the packaged game; generated models, sound, water interaction and resident purchases are also exercised. See [spec.md](spec.md) for the release record.
 
 ## Publish
 

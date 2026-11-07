@@ -49,6 +49,26 @@ try{
   await page.screenshot({path:join(shots,`${name}-care.png`),timeout:60000});
   await page.mouse.click(width-37,40);await page.waitForTimeout(700);
   await page.screenshot({path:join(shots,`${name}-options.png`),timeout:60000});
+  await page.keyboard.press('Escape');await page.waitForTimeout(750);
+  const clickButton=async(name)=>{
+   const control=page.getByRole('button',typeof name==='string'?{name,exact:true}:{name}).first();
+   await control.waitFor({state:'attached',timeout:10000});await page.waitForTimeout(700);
+   const bounds=await control.boundingBox();if(!bounds)throw new Error('No usable bounds for '+name);
+   await page.mouse.click(bounds.x+bounds.width/2,bounds.y+bounds.height/2);await page.waitForTimeout(700);
+  };
+  await clickButton(/^Notebook/);
+  await page.getByRole('button',{name:'Goals',exact:true}).waitFor({state:'attached',timeout:10000});
+  await page.screenshot({path:join(shots,`${name}-notebook-meals.png`),timeout:60000});
+  await clickButton('Equipment');
+  await page.getByRole('button',{name:'Rinse sponge',exact:true}).waitFor({state:'attached',timeout:10000});
+  await page.screenshot({path:join(shots,`${name}-notebook-equipment.png`),timeout:60000});
+  await clickButton(/^(Plants & nursery|Nursery)$/);
+  await page.getByRole('button',{name:/Prepare nursery/}).waitFor({state:'attached',timeout:10000});
+  await page.screenshot({path:join(shots,`${name}-notebook-nursery.png`),timeout:60000});
+  for(const label of ['Goals','Guide','Log']){
+   await clickButton(label);
+   await page.screenshot({path:join(shots,`${name}-notebook-${label.toLowerCase()}.png`),timeout:60000});
+  }
   const state=await page.evaluate(()=>document.documentElement.dataset.starhermit);
   const ok=state==='running'&&problems.length===0;failed ||= !ok;
   const report={name,gpu,state,initialBytes:initial.length,ok,problems};reports.push(report);console.log(JSON.stringify(report));

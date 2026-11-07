@@ -46,6 +46,19 @@ Actual generated triangle counts and asset hashes are recorded in `assets/fish/m
 
 MOSS generated quiet filter ambience, feeding, water pouring and a dream chime; bindings are in `sfx/manifest.txt`. YuE generated the original 90-second instrumental `music/reverie.ogg`. Prompts/seeds/receipts live in `tools/remaster/`; lossless masters live under development-only `art/audio/sources/`. Runtime Opus clips are loudness-normalized, faded and use the engine's music/effects buses. Sound starts only when the player turns it on.
 
+## Keeper progression (1.2)
+
+The Notebook button / **J** opens four pages: Care, Goals, Guide and Log. Care includes meal, equipment and nursery sections. The same pages are available on phones, with a scaled layout on short displays. Opening the modal removes underlying interactive widgets; the tank remains visible behind it.
+
+- **Diet and attachment.** Flakes, sinking pellets and algae wafers have different descent rates and feeding preferences. The Place food action / T lets the player target an area of the tank. Correct meals raise individual fish trust; trust reduces stress and draws fish toward the viewing glass. School size, cover, crowding, oxygen and long lighting periods affect comfort. Fish have persistent names and can be renamed in their inspection card.
+- **Equipment and light.** The filter has two upgrades (24 / 48 Wonder), sponge load and a rinse action that preserves bacteria. The air return has two upgrades (18 / 36 Wonder), improving oxygen recovery and visibly increasing bubbles. A 6 / 8 / 10 / 12-hour photoperiod drives real daylight, plant growth, algae and rest. The existing lighting button cycles Auto / Moonlight / Daylight as a viewing preview without changing the ecosystem schedule.
+- **Planting.** Stem maturity follows nutrients and light. At 60% maturity, trimming produces two free cuttings and reduces maturity by 45 percentage points. Planting spends a cutting before charging the usual 8 Wonder. Full planting/cutting baskets refuse the action without spending resources.
+- **Nursery.** A complete mature school or adult pair, 11 plants, the first filter upgrade, room for two fish, and 82% harmony unlock a nursery for 18 Wonder. Eggs appear among the plants. Twelve tank hours of sufficient harmony, oxygen and cover produce two juveniles; adverse conditions pause development. Welcomed juveniles start at 32% growth and grow with care, using scaled versions of the existing species models.
+- **Knowledge and projects.** First observation of each of ten resident species earns 3 Wonder. Seven one-time milestones and repeating keeper projects add longer goals: varied meals, taking cuttings, sustained harmony and raising juveniles. Claims are idempotent; each project records a fresh baseline. A bounded 30-entry tank log records observations, care, upgrades, nursery events and rehoming.
+- **Stewardship.** Confirmed rehoming removes that fish’s simulation and visual state while retaining minimum school sizes. This makes room for later nursery projects at the 35-fish capacity. New fish receive distinct IDs after removals. The clean-up crew seeks wafers and contributes to algae/detritus cycling through a simulated energy budget.
+
+Save schema 2 uses the existing `oddwater-v1` storage slot. Migration accepts both schemas, preserves old aquarium state and journal claims, fills new fields, validates finite bounds, and clears transient food particles. New progression, names, nursery progress, juvenile growth and project baselines survive reloads. Time advances only while playing and unpaused.
+
 ## Packaging and publishing
 
 `npm run package` regenerates the loader and file index. Set `STARHERMIT` to another installed 1.38.0 runtime if needed. Type-check using the runtime's generated declarations and TypeScript 5 or later.
@@ -58,7 +71,7 @@ Cover generated with the built-in imagegen tool. Prompt: a peaceful slightly imp
 
 ## Verification
 
-`npm test` runs three voxel-physics regressions, validates every indexed package hash, invokes the official 120-frame package check, and drives native desktop, phone, water/audio and Ultra rendering scripts. `tests/native/residents.play` also checks inspection and fish purchases. `npm run test:browser` starts the packaged game before any user gesture and checks care, sound activation and Options at 1366 × 768 desktop and 390 × 844 / DPR 3 phone sizes. Screenshots and asset-generation receipts are retained under development-only `art/`.
+`npm test` runs 15 ecosystem/save/progression tests and three voxel-physics regressions, validates every indexed package hash, invokes the official package check, and drives desktop, phone, notebook, complete nursery progression, water/audio and Ultra rendering scripts. `tests/native/residents.play` also checks inspection and fish purchases. `npm run test:browser` starts the packaged game before any user gesture and checks care, sound activation, Options and all notebook pages at 1366 × 768 desktop and 390 × 844 / DPR 3 phone sizes. Screenshots and asset-generation receipts are retained under development-only `art/`.
 
 The 1.1 release was checked on 2026-11-07: strict TypeScript, voxel physics, official package validation, native Low/Balanced/High/Ultra rendering, feeding/rewards/dreams, water-change gravel disturbance, day/night lighting, audio controls and fish purchases passed. Standard desktop and phone browser startup passed with no game console errors or warnings. Driver-only warnings from software WebGL are filtered. Startup audio loads in the background so the browser does not wait for audio unlock before showing the aquarium.
 
@@ -67,3 +80,5 @@ The forced-High browser capture exceeded the software renderer's screenshot time
 Oddwater's public URL remains https://141f9640-ec24-41b9-86b0-0115fd956448.starhermit.com/index.html. `publication.json` records the current published version, verified file hashes, source commit and archive hash.
 
 Version 1.1 published on 2026-11-07 from source commit `b12b62f`. All 47 indexed production files matched their SHA-256 hashes and the library cover matched `cover.jpg`. Production browser checks passed on desktop and phone, including startup without input, care, sound activation and Options, with no game console errors or warnings.
+
+The 1.2 validation includes 15 model/migration tests, three pebble-physics tests, the original care and dream flows, all notebook pages at desktop/phone sizes, a complete project-to-nursery playthrough, food placement, renaming and confirmed rehoming. Native rendering passed at Low, Balanced, High and Ultra. Desktop/phone browser tests use the engine’s actual accessible control bounds and require notebook controls to exist, with no game console errors or warnings.
