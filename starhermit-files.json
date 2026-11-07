@@ -1,0 +1,11 @@
+{
+  "files": {
+    "LICENSE": {"sha256": "420223151f78e03dcd339b760dab7100186564bdf01c98896c4e84d0920a6d16", "size": 5446},
+    "index.html": {"sha256": "25cc3043da9b84f12562661102c64a785c3643ac1ddadf66198737a0654e1b1b", "size": 1928},
+    "src/main.ts": {"sha256": "1839b90f2a84364a04cf513a1c3229765fe11d945fe5cc1d6d28398b171bfbc8", "size": 31447},
+    "src/simulation.ts": {"sha256": "8b241186fa3283001bc82441ac81b3858f15177ef1bc920f0c1c791c88739f5d", "size": 5355},
+    "starhermit.txt": {"sha256": "249446ced0e787e34573ea9034b735d5ca2ebd05a72dd35202d204c29670e95b", "size": 605}
+  },
+  "excluded": ["README.md", "tsconfig.json"],
+  "format": 1
+}
