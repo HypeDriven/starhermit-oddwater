@@ -65,3 +65,5 @@ The 1.1 release was checked on 2026-11-07: strict TypeScript, voxel physics, off
 The forced-High browser capture exceeded the software renderer's screenshot timeout while the machine's hardware GPU was reserved by another benchmark; full High/Ultra effects were verified with the native runtime. These are functional rendering checks, not a 60 FPS certification. Ultra's maximum-feature water is intentionally demanding.
 
 Oddwater's public URL remains https://141f9640-ec24-41b9-86b0-0115fd956448.starhermit.com/index.html. `publication.json` records the current published version, verified file hashes, source commit and archive hash.
+
+Version 1.1 published on 2026-11-07 from source commit `b12b62f`. All 47 indexed production files matched their SHA-256 hashes and the library cover matched `cover.jpg`. Production browser checks passed on desktop and phone, including startup without input, care, sound activation and Options, with no game console errors or warnings.

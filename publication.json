@@ -22,13 +22,13 @@
       "pinnedCommitSha": null,
       "deployedCommitSha": null,
       "deployError": null,
-      "deployedAt": "2026-11-07T07:47:31.677231+00:00",
+      "deployedAt": "2026-11-07T11:33:02.592309+00:00",
       "externalLaunchUrl": null,
       "engineVersion": "1.38.0",
       "deployWarning": null
     },
-    "description": "A living freshwater aquarium with a slightly impossible imagination. Tend a planted community tank, earn Wonder and awaken three surreal dreams.",
-    "releaseNotesUpdatedAt": null,
+    "description": "# Oddwater\n\nA living freshwater aquarium with a slightly impossible imagination. Tend a planted community tank, earn Wonder, and awaken three surreal dreams.\n\nWatch neon tetras and harlequin rasboras school through the plants, peppered corys forage over the gravel, and a pearl gourami patrol the water. Snails graze the glass, shrimp browse the substrate, and tiny freshwater insects explore the shallows.\n\nFeed sparingly, change water, add plants and compatible fish, and follow the keeper's journal. Your aquarium saves automatically.\n\nChoose **Ultra** in Options for the richest water, reflections, caustics, shadows and fish textures. Lower graphics levels retain the full ecosystem. Turn Sound on for soft aquarium ambience, care sounds and an original instrumental soundtrack.\n\nDrag to orbit, scroll to zoom, and click a fish or invertebrate to inspect it. On phones, use the zoom buttons and Tank notes. The gear button opens graphics, sound, controls and accessibility settings.",
+    "releaseNotesUpdatedAt": "2026-11-07T11:33:02.595324+00:00",
     "serverRuntime": null,
     "bannerArtSource": null,
     "bannerArtUpdatedAt": null,
@@ -36,19 +36,39 @@
     "links": [],
     "isDisabled": false
   },
-  "publishedAt": "2026-11-07T07:47:31.729Z",
-  "sourceCommit": "38d9b6a11226193b6f7252594876271743cf8f71",
-  "bytesReceived": 466715,
-  "archiveSha256": "57882e594940d07588241d250fb0feae345f8196f9ba36aa5491d9d0ebe6d245",
+  "publishedAt": "2026-11-07T11:33:02.695Z",
+  "sourceCommit": "b12b62fa6226053970ea2294500fa09a24833a2d",
+  "bytesReceived": 15033942,
+  "archiveSha256": "4c2114c828aa3788efdc769e44939d9984e13fb570003587f2ba2af1c1aa2ae2",
   "result": {
-    "bytesReceived": 466715
+    "clientPublished": true,
+    "serverImageLoaded": false,
+    "imageDigest": null,
+    "bytesReceived": 15033942,
+    "mode": "replace",
+    "filesRemoved": 0,
+    "engineVersion": "1.38.0",
+    "deployWarning": null
   },
-  "verifiedAt": "2026-11-07T07:47:41.583Z",
-  "verifiedFiles": 11,
+  "verifiedAt": "2026-11-07T11:33:37.770Z",
+  "verifiedFiles": 47,
   "browserChecks": {
-    "desktop": "passed",
-    "phone": "passed",
-    "consoleErrors": 0,
-    "consoleWarnings": 0
-  }
+    "desktop": {
+      "passed": true,
+      "state": "running",
+      "problems": []
+    },
+    "phone": {
+      "passed": true,
+      "state": "running",
+      "problems": []
+    }
+  },
+  "version": "1.1.0",
+  "nativeGraphicsChecks": [
+    "low",
+    "balanced",
+    "high",
+    "ultra"
+  ]
 }
