@@ -1,0 +1,54 @@
+{
+  "game": {
+    "id": "141f9640-ec24-41b9-86b0-0115fd956448",
+    "repoUrl": "upload:2b29f31f7fa545a982fc60c6341b9784",
+    "ownerLogin": "",
+    "repoName": "",
+    "displayName": "Oddwater",
+    "launchPath": "index.html",
+    "serverScriptPath": null,
+    "gameSlug": "141f9640-ec24-41b9-86b0-0115fd956448",
+    "isVerifiedOwner": false,
+    "metadataSource": "manual",
+    "createdAt": "2026-11-07T07:47:31.671232+00:00",
+    "coverArtSource": "upload",
+    "coverArtUpdatedAt": "2026-11-07T07:47:41.359795+00:00",
+    "submittedByUserId": "2712e04e-461b-4d23-81ae-e40b429128a8",
+    "submittedByUsername": "starhermit",
+    "hosting": {
+      "hostingEnabled": true,
+      "hostedUrl": "https://141f9640-ec24-41b9-86b0-0115fd956448.starhermit.com/index.html",
+      "deployStatus": "live",
+      "pinnedCommitSha": null,
+      "deployedCommitSha": null,
+      "deployError": null,
+      "deployedAt": "2026-11-07T07:47:31.677231+00:00",
+      "externalLaunchUrl": null,
+      "engineVersion": "1.38.0",
+      "deployWarning": null
+    },
+    "description": "A living freshwater aquarium with a slightly impossible imagination. Tend a planted community tank, earn Wonder and awaken three surreal dreams.",
+    "releaseNotesUpdatedAt": null,
+    "serverRuntime": null,
+    "bannerArtSource": null,
+    "bannerArtUpdatedAt": null,
+    "tags": [],
+    "links": [],
+    "isDisabled": false
+  },
+  "publishedAt": "2026-11-07T07:47:31.729Z",
+  "sourceCommit": "38d9b6a11226193b6f7252594876271743cf8f71",
+  "bytesReceived": 466715,
+  "archiveSha256": "57882e594940d07588241d250fb0feae345f8196f9ba36aa5491d9d0ebe6d245",
+  "result": {
+    "bytesReceived": 466715
+  },
+  "verifiedAt": "2026-11-07T07:47:41.583Z",
+  "verifiedFiles": 11,
+  "browserChecks": {
+    "desktop": "passed",
+    "phone": "passed",
+    "consoleErrors": 0,
+    "consoleWarnings": 0
+  }
+}
