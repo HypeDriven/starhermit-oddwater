@@ -22,13 +22,13 @@
       "pinnedCommitSha": null,
       "deployedCommitSha": null,
       "deployError": null,
-      "deployedAt": "2026-11-07T12:22:37.286546+00:00",
+      "deployedAt": "2026-11-07T12:47:10.014271+00:00",
       "externalLaunchUrl": null,
       "engineVersion": "1.38.0",
       "deployWarning": null
     },
-    "description": "# Oddwater\n\nA living freshwater aquarium with a slightly impossible imagination. Tend a planted community tank, get to know its residents, and awaken three surreal dreams.\n\nWatch neon tetras and harlequin rasboras school through the plants, peppered corys forage over the gravel, and a pearl gourami patrol the water. Shrimp browse the substrate, snails graze the glass, and tiny freshwater insects explore the shallows.\n\nOpen the **keeper\u2019s notebook** to choose foods, improve filtration and aeration, adjust the light cycle, grow plants from cuttings, and raise juveniles in a sheltered nursery. Name your fish, build their trust, complete the field guide, and work through ongoing keeper projects. Your aquarium\u2019s history and progress save automatically.\n\nDrag to orbit, scroll to zoom, and click a resident to inspect it. On phones, use the zoom buttons, Notebook and Tank notes. Press **J** for the notebook or use the gear button for graphics, sound, controls and accessibility.\n\nChoose **Ultra** for the richest water, reflections, caustics and fish textures. Turn Sound on for soft aquarium ambience and an original instrumental soundtrack.",
-    "releaseNotesUpdatedAt": "2026-11-07T12:22:37.286972+00:00",
+    "description": "# Oddwater\n\nA living freshwater aquarium with a slightly impossible imagination. Tend a planted community tank, get to know its residents, and awaken three surreal dreams.\n\nWatch neon tetras and harlequin rasboras school through the plants, peppered corys forage over the gravel, and a pearl gourami patrol the water. Shrimp browse the substrate, snails graze the glass, and tiny freshwater insects explore the shallows.\n\nOpen the **keeper’s notebook** to choose foods, improve filtration and aeration, adjust the light cycle, grow plants from cuttings, and raise juveniles in a sheltered nursery. Name your fish, build their trust, complete the field guide, and work through ongoing keeper projects. Arrange moss, leaf litter and pebble refuges to support a living clean-up crew. Raise cherry shrimp, watch their young grow, and record discoveries from meals, nights and moults. Your aquarium’s history and progress save automatically.\n\nDrag to orbit, scroll to zoom, and click a resident to inspect it. On phones, use the zoom buttons, Notebook and Tank notes. Press **J** for the notebook or use the gear button for graphics, sound, controls and accessibility.\n\nChoose **Ultra** for the richest water, reflections, caustics and fish textures. Turn Sound on for soft aquarium ambience and an original instrumental soundtrack.",
+    "releaseNotesUpdatedAt": "2026-11-07T12:47:10.014648+00:00",
     "serverRuntime": null,
     "bannerArtSource": null,
     "bannerArtUpdatedAt": null,
@@ -36,22 +36,22 @@
     "links": [],
     "isDisabled": false
   },
-  "publishedAt": "2026-11-07T12:22:37.371Z",
-  "sourceCommit": "fd9bf377e4d659991bc9edf54e794899a8d6c595",
-  "bytesReceived": 15045145,
-  "archiveSha256": "c24b767fba6ad2b38859b5ee48515df96459fd88d7622b577c29f3d8b6ebef26",
+  "publishedAt": "2026-11-07T12:47:10.105Z",
+  "sourceCommit": "9ee0bf7e72bfac0013a4906d858a7599beee6d49",
+  "bytesReceived": 15051838,
+  "archiveSha256": "45a71041d649878fd0bd9e35ffdf5ca5b2339ef87798fb228f6ecb4367b8b504",
   "result": {
     "clientPublished": true,
     "serverImageLoaded": false,
     "imageDigest": null,
-    "bytesReceived": 15045145,
+    "bytesReceived": 15051838,
     "mode": "replace",
     "filesRemoved": 0,
     "engineVersion": "1.38.0",
     "deployWarning": null
   },
-  "verifiedAt": "2026-11-07T12:23:08.640Z",
-  "verifiedFiles": 48,
+  "verifiedAt": "2026-11-07T12:47:26.285Z",
+  "verifiedFiles": 50,
   "browserChecks": {
     "desktop": {
       "passed": true,
@@ -64,7 +64,7 @@
       "problems": []
     }
   },
-  "version": "1.2.0",
+  "version": "1.3.0",
   "nativeGraphicsChecks": [
     "low",
     "balanced",
@@ -72,12 +72,18 @@
     "ultra"
   ],
   "gameplayChecks": [
-    "save migration",
+    "save schemas 1–3",
     "food and equipment",
     "notebook desktop and phone",
-    "projects and milestones",
-    "nursery and juvenile growth",
-    "renaming and rehoming"
+    "projects and nine milestones",
+    "fish nursery and juvenile growth",
+    "renaming and rehoming",
+    "microhabitat placement and decay",
+    "shrimp moults and persistent energy",
+    "shrimp brood, growth, sharing and rebreeding",
+    "behavior field notes",
+    "320-pixel phone layout",
+    "full-capacity rendering"
   ],
-  "modelTestsPassed": 18
+  "modelTestsPassed": 26
 }
