@@ -1,0 +1,17 @@
+# viewport 1440x900
+until 1200 RESIDENT TISSUE REVIEW
+frames 20
+expect Front light
+expect Scattering on
+save tissue-front
+key KeyF 2
+frames 3
+expect Back light
+save tissue-back
+key KeyW 2
+frames 3
+expect Scattering off
+save tissue-back-baseline
+key KeyF 2
+frames 3
+save tissue-front-baseline

@@ -1,4 +1,8 @@
-# 1.3 — Small worlds
+# 1.3.1 — Light through little lives
+
+Shrimp and snails now have dedicated subsurface scattering. Light filters through thin legs, antennae and snail feelers, with warmer diffusion through their bodies and a subtle response on mineral shells. Tissue thickness follows each part’s geometry and juvenile growth, and the effect combines with the tank’s water caustics.
+
+## 1.3 — Small worlds
 
 The clean-up crew has a life of its own. Open **Notebook → Habitat**.
 

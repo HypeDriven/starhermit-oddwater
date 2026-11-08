@@ -5,18 +5,19 @@ import {isDay} from './simulation.js';
 import type {Neighbour} from './ecology.js';
 import type {Aquarium} from './simulation.js';
 import {submergedHooks} from './water/aquarium.js';
-import {leafScattering} from './tissue.js';
+import {leafScattering,invertebrateThickness,cherryScattering,amanoScattering,snailScattering,shellScattering} from './tissue.js';
 const sphere=new SphereGeometry(1,14,10);
 const eye=new MeshStandardMaterial({color:0x121a16,roughness:.15});
-function mat(color:number,roughness=.4,opacity=1){const m=new MeshStandardMaterial({color,roughness,metalness:.02,transparent:opacity<1,opacity,side:DoubleSide});m.hooks=submergedHooks({light:leafScattering});return m;}
-const snailBody=mat(0xa6aa7a,.73),shell=mat(0xa38042,.32),red=mat(0xc63c2b,.35,.82),amber=mat(0xb7c9a2,.26,.65),nymph=mat(0x7a8a51,.74);
-shell.hooks=submergedHooks({surface:`fn surface(s: Surface)->Surface{var o=s;let bands=pow(abs(sin(s.uv.x*34.0+s.uv.y*3.0)),5.0);o.base_color=vec4f(s.base_color.rgb*(0.50+bands*0.65),1.0);return o;}`});
+function mat(color:number,roughness=.4,opacity=1,scattering=leafScattering){const m=new MeshStandardMaterial({color,roughness,metalness:.02,transparent:opacity<1,opacity,side:DoubleSide});m.hooks=submergedHooks({vertex:invertebrateThickness,light:scattering});return m;}
+const snailBody=mat(0xa6aa7a,.73,1,snailScattering),shell=mat(0xa38042,.32,1,shellScattering),red=mat(0xc63c2b,.35,.82,cherryScattering),amber=mat(0xb7c9a2,.26,.65,amanoScattering),nymph=mat(0x7a8a51,.74);
+shell.hooks=submergedHooks({vertex:invertebrateThickness,light:shellScattering,surface:`fn surface(s: Surface)->Surface{var o=s;let bands=pow(abs(sin(s.uv.x*34.0+s.uv.y*3.0)),5.0);o.base_color=vec4f(s.base_color.rgb*(0.50+bands*0.65),1.0);return o;}`});
 function part(parent:Group,material:MeshStandardMaterial,x:number,y:number,z:number,sx:number,sy:number,sz:number){const m=new Mesh(sphere,material);m.position.set(x,y,z);m.scale.set(sx,sy,sz);m.castShadow=true;m.receiveShadow=true;if(material.transparent)m.renderOrder=28;parent.add(m);return m;}
-function rod(parent:Group,material:MeshStandardMaterial,a:Vector3,b:Vector3,r:number){const d=b.clone().sub(a),m=new Mesh(new CylinderGeometry(r*.65,r,d.length(),6),material);m.position.copy(a).add(b).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new Vector3(0,1,0),d.normalize());if(material.transparent)m.renderOrder=28;parent.add(m);return m;}
-function spiral(){const vertices:number[]=[],uv:number[]=[],ix:number[]=[];const steps=100,sides=10;
- for(let i=0;i<=steps;i++){const t=i/steps,a=t*Math.PI*5.7,rad=.015+t*.15,tube=.008+t*.058;for(let j=0;j<=sides;j++){const b=j/sides*Math.PI*2;vertices.push(Math.cos(a)*(rad+Math.cos(b)*tube),Math.sin(a)*(rad+Math.cos(b)*tube),Math.sin(b)*tube);uv.push(t,j/sides);}}
+function thicknessAttribute(geometry:BufferGeometry,diameter:number){const count=geometry.getAttribute('position')!.count,values=new Float32Array(count*4);for(let i=0;i<count;i++)values[i*4]=diameter;geometry.setAttribute('custom',new Float32BufferAttribute(values,4));return geometry;}
+function rod(parent:Group,material:MeshStandardMaterial,a:Vector3,b:Vector3,r:number){const d=b.clone().sub(a),m=new Mesh(thicknessAttribute(new CylinderGeometry(r*.65,r,d.length(),6),r*1.65),material);m.position.copy(a).add(b).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new Vector3(0,1,0),d.normalize());if(material.transparent)m.renderOrder=28;parent.add(m);return m;}
+function spiral(){const vertices:number[]=[],uv:number[]=[],ix:number[]=[],thickness:number[]=[];const steps=100,sides=10;
+ for(let i=0;i<=steps;i++){const t=i/steps,a=t*Math.PI*5.7,rad=.015+t*.15,tube=.008+t*.058;for(let j=0;j<=sides;j++){const b=j/sides*Math.PI*2;vertices.push(Math.cos(a)*(rad+Math.cos(b)*tube),Math.sin(a)*(rad+Math.cos(b)*tube),Math.sin(b)*tube);uv.push(t,j/sides);thickness.push(tube*2,0,0,0);}}
  for(let i=0;i<steps;i++)for(let j=0;j<sides;j++){const a=i*(sides+1)+j;ix.push(a,a+1,a+sides+1,a+1,a+sides+2,a+sides+1);}
- const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(vertices,3));g.setAttribute('uv',new Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();return g;
+ const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(vertices,3));g.setAttribute('uv',new Float32BufferAttribute(uv,2));g.setAttribute('custom',new Float32BufferAttribute(thickness,4));g.setIndex(ix);g.computeVertexNormals();return g;
 }
 const shellGeo=spiral();
 export interface Resident {id:number;state:Neighbour;name:string;detail:string;kind:'snail'|'shrimp'|'insect';root:Group;phase:number;x:number;z:number;angle:number;limbs:Group[];glass:boolean;activity:string;}

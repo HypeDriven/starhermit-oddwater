@@ -1,0 +1,54 @@
+{
+  "front": {
+    "cherry": {
+      "mean_rgb_change": 1.0087486338797813,
+      "pixels_changed": 6189
+    },
+    "amano": {
+      "mean_rgb_change": 1.1228967136150236,
+      "pixels_changed": 5140
+    },
+    "nerite-body": {
+      "mean_rgb_change": 2.714101694915254,
+      "pixels_changed": 1982
+    },
+    "ramshorn-body": {
+      "mean_rgb_change": 2.995186440677966,
+      "pixels_changed": 2127
+    },
+    "nerite-shell": {
+      "mean_rgb_change": 0.11242835595776772,
+      "pixels_changed": 141
+    },
+    "ramshorn-shell": {
+      "mean_rgb_change": 0.08080128205128205,
+      "pixels_changed": 25
+    }
+  },
+  "back": {
+    "cherry": {
+      "mean_rgb_change": 7.802617486338797,
+      "pixels_changed": 14239
+    },
+    "amano": {
+      "mean_rgb_change": 7.7869577464788735,
+      "pixels_changed": 15580
+    },
+    "nerite-body": {
+      "mean_rgb_change": 15.801536723163842,
+      "pixels_changed": 5898
+    },
+    "ramshorn-body": {
+      "mean_rgb_change": 15.74187570621469,
+      "pixels_changed": 6544
+    },
+    "nerite-shell": {
+      "mean_rgb_change": 0.7619607843137254,
+      "pixels_changed": 374
+    },
+    "ramshorn-shell": {
+      "mean_rgb_change": 0.8630288461538461,
+      "pixels_changed": 1420
+    }
+  }
+}

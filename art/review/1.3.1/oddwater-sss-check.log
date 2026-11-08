@@ -1,0 +1,15 @@
+package=Directory files=51 bytes=15451738 name="Oddwater" api=1 entry=src/main.ts capabilities=storage actions=feed,change,plant,dream,pause,help,options,notebook,target_feed
+limits=Limits { fuel_ms: 32, heap_bytes: 268435456, call_frames: 1024, wasm_bytes: 268435456, gpu_bytes: 2147483648, meshes: 4096, instanced_meshes: 1024, mesh_bytes: 130023424, image_bytes: 268435456, images: 120, audio_clips: 128, audio_bytes: 134217728, voices: 256, storage_value_bytes: 1048576, storage_bytes: 67108864 }
+left out: 9 paths by 9 rules (--verbose lists them)
+  .starhermitignore line 1: README.md: 1 (README.md)
+  .starhermitignore line 2: spec.md: 1 (spec.md)
+  .starhermitignore line 3: publication.json: 1 (publication.json)
+  .starhermitignore line 4: tools/: 1 (tools/)
+  .starhermitignore line 5: tests/: 1 (tests/)
+  .starhermitignore line 6: coverart.png: 1 (coverart.png)
+  .starhermitignore line 7: art/: 1 (art/)
+  default rule package.json: 1 (package.json)
+  default rule tsconfig.json: 1 (tsconfig.json)
+web=linked modules=16
+runnable=true engine="TypeScript" frames=120 probes=0
+PASS package src/main.ts: valid; 120 frames headless

@@ -1,0 +1,4 @@
+play_script frames=103 saved=remaster-tank:63816,remaster-sound:64141,remaster-fed:62170,remaster-water:64806,remaster-night:33470 objects=3756 game_thread none draw none draw_parts_p50 scene=0.00ms pass=0.00ms overlay=0.00ms timed_draws=0
+images peak=55.5MiB budget=256.0MiB share=22% quality=terrestrial
+runtime_render game_frames=5 runs=true objects=3756 skipped=0 distinct_colors=33494 screens=options:0.000/951 not-responding:0.000/1169 files:0.000/928 permission:0.000/624 error:0.000/880 stopped:0.000/1010 microphone=[229, 72, 77] capture_png=564448
+PASS runtime render: every trusted screen above the game's frame, opaque, with text, dimming the rest; the microphone indicator; a capture under the menu is the game's frame alone
