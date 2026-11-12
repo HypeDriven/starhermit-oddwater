@@ -24,3 +24,7 @@ description.file=description.md
 release_notes.file=release-notes.md
 control.notebook=KeyJ | Keeper notebook
 control.target_feed=KeyT | Place food in the tank
+
+# Game language (saved per player); Automatic follows the account/device.
+control.localization=F2 | Language
+engine.group.localization=Interface

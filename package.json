@@ -6,7 +6,7 @@
   "scripts": {
     "package": "node tools/package-web.mjs",
     "publish:starhermit": "node --env-file-if-exists=../.env tools/publish.mjs",
-    "test": "node --import ./tests/register.mjs tests/simulation.test.mjs && node tests/gravel.test.mjs && node --import ./tests/register.mjs tests/ecology.test.mjs && node tools/check.mjs",
+    "test": "node --test tests/localization.test.mjs && node --import ./tests/register.mjs tests/simulation.test.mjs && node tests/gravel.test.mjs && node --import ./tests/register.mjs tests/ecology.test.mjs && node tools/check.mjs",
     "test:physics": "node tests/gravel.test.mjs",
     "assets:generate": "python3 tools/remaster/generate.py",
     "assets:prepare": "python3 tools/remaster/prepare.py && node tools/remaster/optimize.mjs",

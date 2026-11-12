@@ -1,4 +1,12 @@
-import { frame, onFixedUpdate, onRender, onStart, onSuspend, onQuit, setFixedRate, levelSettings, openMenu, setBusy, setReady } from 'starhermit:engine';
+import { localizedStyle as __l10nStyle } from "./l10n/font.js";
+import { localizedDrawOptions as __l10nDrawOptions } from "./l10n/font.js";
+import { withLanguageRender as __l10nRender } from "./l10n/menu.js";
+// localization-runtime:attached
+import { localizedFont as __l10nFont, setLocalizedStyles as __l10nStyles } from "./l10n/font.js";
+import { openLocalizedOptions as __l10nOptions } from "./l10n/menu.js";
+// display-localization:attached
+import { localizedText as __displayText, preserveUserText as __keepDisplayText } from "./l10n/text.js";
+import { frame, onFixedUpdate, onRender, onStart, onSuspend, onQuit, setFixedRate, levelSettings, setBusy, setReady } from 'starhermit:engine';
 import { AmbientLight, HemisphereLight, DirectionalLight, PointLight, BoxGeometry, SphereGeometry, CylinderGeometry, TorusGeometry, BufferGeometry, Float32BufferAttribute, Mesh, MeshStandardMaterial, MeshBasicMaterial, PerspectiveCamera, Color, Group, Vector3,  OrthographicCamera, FogExp2, DoubleSide, ACESFilmicToneMapping, scene, renderer } from 'starhermit:scene';
 import { onAction, onPointerButton, onPointerMove, onWheel } from 'starhermit:input';
 import { storage } from 'starhermit:storage';
@@ -119,11 +127,11 @@ function findNeighbour(key:string){
 }
 function unlockDream(){if(tank.dreams>=3){notify('All three impossibilities are awake. The aquarium is dreaming.');return;}const cost=[35,55,80][tank.dreams];if(tank.wonder<cost){notify('This dream needs '+cost+' Wonder. Keep your ecosystem thriving.');return;}if(harmony(tank)<70){notify('Dreams need a calm ecosystem: reach 70% harmony.');return;}tank.wonder-=cost;dreamObject(tank.dreams);tank.dreams++;sound('dream');aquariumWater?.ripple(0,0,.12);notify(['An orbiting pearl. The fish insist it has always been here.','A tiny moon rises underwater. The corys remain unimpressed.','Tea is served upside down. The water declines to spill.'][tank.dreams-1]);save();}
 function doAction(a:string){if(a==='feed')useFeed();if(a==='change'){waterChange(tank);sound('water');aquariumWater?.ripple(5.5,-1.6,.16);substrate?.model.disturb(5.5,-1.6,.8,2.2);notify('30% water changed. Dissolved waste is diluted; the filter stays alive.');save();}if(a==='plant')addPlant();if(a==='clean'){tank.algae=Math.max(0,tank.algae-.18);notify('Glass polished. A clearer window into a small, strange world.');save();}if(a==='dream')unlockDream();}
-const css=ui.stylesFromCss(`button { background:#163531; color:#dbe6da; border:1px solid #3b554b; border-radius:9px; padding:10px 16px; font-size:14px; min-height:44px; } button:hover {background:#294c40;border-color:#aec48b;} button:selected {background:#cce49a;color:#17342a;border-color:#cce49a;} button:disabled {opacity:.4;} .small {padding:7px 11px;min-height:34px;font-size:12px;} .notebook-tab {padding:7px 4px;min-height:34px;font-size:12px;} .primary {background:#cce49a;color:#18362c;border-color:#cce49a;} .clear {background:#0d2724;border-color:#385247;} label {color:#dce6db;font-size:14px;} paragraph {color:#9bb1a4;font-size:14px;} .serif {font-family:serif;font-size:25px;} .shop {width:220px; min-height:80px;text-align:left;} .mobile {padding:9px 10px;font-size:12px;} `);ui.setStyles(css.styles);
-function txt(s:string,x:number,y:number,size=14,color=C.ink,font='sans-serif',align:'start'|'center'|'end'='start'){draw.text(s,x*S,y*S,{size:size*S,color,font,align});}
+const css=ui.stylesFromCss(`button { background:#163531; color:#dbe6da; border:1px solid #3b554b; border-radius:9px; padding:10px 16px; font-size:14px; min-height:44px; } button:hover {background:#294c40;border-color:#aec48b;} button:selected {background:#cce49a;color:#17342a;border-color:#cce49a;} button:disabled {opacity:.4;} .small {padding:7px 11px;min-height:34px;font-size:12px;} .notebook-tab {padding:7px 4px;min-height:34px;font-size:12px;} .primary {background:#cce49a;color:#18362c;border-color:#cce49a;} .clear {background:#0d2724;border-color:#385247;} label {color:#dce6db;font-size:14px;} paragraph {color:#9bb1a4;font-size:14px;} .serif {font-family:serif;font-size:25px;} .shop {width:220px; min-height:80px;text-align:left;} .mobile {padding:9px 10px;font-size:12px;} `);__l10nStyles(css.styles);
+function txt(s:string,x:number,y:number,size=14,color=C.ink,font='sans-serif',align:'start'|'center'|'end'='start'){draw.text(__displayText(s),x*S,y*S,__l10nDrawOptions({size:size*S,color,font: __l10nFont(font),align}));}
 function line(x:number,y:number,w:number){draw.line(x*S,y*S,(x+w)*S,y*S,C.line,1);}
 function rect(x:number,y:number,w:number,h:number,color:string,r=0){if(r)draw.roundRect(x*S,y*S,w*S,h*S,r*S,color);else draw.rect(x*S,y*S,w*S,h*S,color);}
-function button(id:string,label:string,x:number,y:number,w:number,style='',selectedFlag=false){if(notebook.open)return false;let clicked=false;ui.area({x:x*S,y:y*S,width:w*S,height:60*S},()=>{clicked=ui.id(id).style(style).button(label,{selected:selectedFlag});});return clicked;}
+function button(id:string,label:string,x:number,y:number,w:number,style='',selectedFlag=false){if(notebook.open)return false;let clicked=false;ui.area({x:x*S,y:y*S,width:w*S,height:60*S},()=>{clicked=ui.id(id).style(__l10nStyle(style)).button(__displayText(label),{selected:selectedFlag});});return clicked;}
 const tasks=[{title:'Dinner with the neighbours',detail:'Feed your fish for the first time',done:()=>tank.fed>0,reward:12},{title:'A little more wilderness',detail:'Grow your planting to 11 plants',done:()=>tank.plants>=11,reward:18},{title:'An excellent glass of water',detail:'Complete a 30% water change',done:()=>tank.changed>0,reward:10},{title:'Permission to be impossible',detail:'Awaken your first dream',done:()=>tank.dreams>0,reward:20}];
 function hud(){const f=frame();S=ui.preferences().scale;width=f.width/S;height=f.height/S;compact=width<850;const w=width,h=height;
  // The aquarium stays visible behind a restrained instrument-like HUD.
@@ -131,7 +139,7 @@ function hud(){const f=frame();S=ui.preferences().scale;width=f.width/S;height=f
  if(!compact&&w>1050){txt('FRESHWATER  /  180 L',w/2,23,11,C.muted,'monospace','center');txt('The ordinary, beautifully strange.',w/2,42,15,C.ink,'serif','center');}
  if(!compact&&button('notebook','Notebook  J',260,20,112,'small',notebook.open)){notebook.open=!notebook.open;showHelp=false;}
  const balance=compact?(tank.wonder>=1e6?(tank.wonder/1e6).toFixed(1)+'m':tank.wonder>=10000?Math.floor(tank.wonder/1000)+'k':Math.floor(tank.wonder))+' W':Math.floor(tank.wonder)+'  Wonder';
- txt(balance,w-(compact?124:260),25,compact?14:17,C.gold,'serif','end');if(button('options','⚙',w-59,19,40,'small'))openMenu();if(button('help','?',w-105,19,40,'small',showHelp))showHelp=!showHelp;if(!compact&&button('sound',soundEnabled()?'Sound on':'Sound off',w-193,20,84,'small',soundEnabled()))toggleSound();
+ txt(balance,w-(compact?124:260),25,compact?14:17,C.gold,'serif','end');if(button('options','⚙',w-59,19,40,'small'))__l10nOptions();if(button('help','?',w-105,19,40,'small',showHelp))showHelp=!showHelp;if(!compact&&button('sound',soundEnabled()?'Sound on':'Sound off',w-193,20,84,'small',soundEnabled()))toggleSound();
  if(!compact){leftPanel(25,107);rightPanel(w-240,107);}
  else {rect(14,91,w-28,43,'#102c2ae8',10);txt(Math.round(harmony(tank))+'% harmony',26,104,13,C.lime);txt(tank.temp.toFixed(1)+' °C',w/2,104,13,C.ink,'sans-serif','center');txt('Day '+(Math.floor(tank.hours/24)+1),w-28,104,13,C.muted,'sans-serif','end');}
  if(!compact){txt('THE REVERIE',w/2,101,12,C.lime,'monospace','center');txt('Drag to orbit  ·  Scroll to get closer  ·  Click a fish to meet it',w/2,122,11,C.muted,'sans-serif','center');}
@@ -166,14 +174,14 @@ function fishCard(x:number,y:number,f:Fish){
  txt('Comfort '+Math.round(comfort(tank,f))+'% · Stress '+Math.round(f.stress)+'%',x+18,y+110,11,C.muted);
  txt('Trust '+Math.round(f.bond)+'% · Prefers '+foods[p.food].name.toLowerCase(),x+18,y+132,11,C.muted);
  txt('Rename this neighbour',x+18,y+153,9,C.muted);
- ui.area({x:(x+18)*S,y:(y+168)*S,width:245*S,height:34*S},()=>{const name=ui.textField('Fish name '+f.id,f.name,{width:230*S,maxChars:18});if(name.trim()&&name!==f.name){f.name=name;save();}});
+ ui.area({x:(x+18)*S,y:(y+168)*S,width:245*S,height:34*S},()=>{const name=ui.textField(__displayText('Fish name '+f.id),f.name,{width:230*S,maxChars:18});if(name.trim()&&name!==f.name){f.name=name;save();}});
  if(button('rehome-fish',rehomeConfirmation===f.id?'Confirm rehoming':'Rehome with another keeper',x+18,y+210,270,'small')){if(rehomeConfirmation===f.id){const before=tank.fish.length;notify(rehomeFish(tank,f.id));if(tank.fish.length<before){removeFishVisual(f.id);selected=-1;}rehomeConfirmation=-1;save();}else rehomeConfirmation=f.id;}
  if(button('close-fish','×',x+275,y+10,35,'small')){selected=-1;rehomeConfirmation=-1;}
 }
 function residentCard(x:number,y:number,r:Resident){
  rect(x,y,290,208,'#112f2bf5',12);txt(r.name,x+18,y+14,22,C.lime,'serif');
  const n=r.state;txt((n.growth<.95?'Young · '+Math.round(n.growth*100)+'% grown':'Settled adult')+' · Energy '+Math.round(n.energy*100)+'%',x+18,y+45,11,C.gold);
- const words=r.detail.split(' ');let first='';while(words.length&&(first+' '+words[0]).length<42)first+=(first?' ':'')+words.shift();txt(first,x+18,y+72,11,C.ink);txt(words.join(' '),x+18,y+90,11,C.ink);
+ const words=__displayText(r.detail).split(' ');let first='';while(words.length&&(first+' '+words[0]).length<42)first+=(first?' ':'')+words.shift();txt(__keepDisplayText(first),x+18,y+72,11,C.ink);txt(__keepDisplayText(words.join(' ')),x+18,y+90,11,C.ink);
  txt(crewActivity(tank,n,isDay(tank)),x+18,y+115,12,C.lime);const note=noteFor(tank,n,isDay(tank));
  txt(note?(tank.ecology.notes.includes(note)?'Already in your field notes':'A new behavior to remember'):'Meals, nights, moults and young bring discoveries.',x+18,y+140,10,C.muted);
  if(button('record-behavior','Record behavior',x+18,y+162,208,'small'))notebookAction('field-note');
@@ -193,16 +201,20 @@ function overDetail(px:number,py:number){
 onPointerButton(e=>{if(e.button!==0)return;if(e.pressed){if(ui.pointerOver()||showHelp||notebook.open||overDetail(e.x,e.y))return;dragging=true;downX=dragX=e.x;downY=dragY=e.y;moved=false;}else if(dragging){dragging=false;if(!moved){if(activeTool==='feed'){const x=clamp((e.x/(width*S)-.5)*15,-6,6);if(feed(tank,x,1)){aquariumWater?.ripple(x,1,.08);sound('feed');notify('A small sprinkle. The school is on its way.');save();}else notify('There is already plenty of food in the water.');activeTool='observe';}else pickFish(e.x,e.y);}}});
 onPointerMove((x,y)=>{if(!dragging)return;const dx=x-dragX,dy=y-dragY;if(Math.abs(x-downX)+Math.abs(y-downY)>7)moved=true;if(moved){yaw=clamp(yaw-dx*.003,-1.1,1.1);pitch=clamp(pitch+dy*.002,.02,.65);}dragX=x;dragY=y;});
 onWheel((_x,y)=>{if(!ui.pointerOver())distance=clamp(distance+y*.75,10.2,31);});
-onAction(e=>{if(!e.pressed)return;if(e.action==='options')openMenu();else if(e.action==='target_feed')notebookAction('target-feed');else if(e.action==='notebook'){notebook.open=!notebook.open;showHelp=false;}else if(e.action==='pause')speed=speed===0?1:0;else if(e.action==='help'){showHelp=!showHelp;notebook.open=false;}else doAction(e.action);});
-setReady(false,{label:'Loading the living aquarium',seconds:120});
-onStart(async()=>{setBusy('Preparing the living aquarium',{seconds:120});setFixedRate(30);await prepareFishModels(frame().quality);void prepareSound().catch(error=>console.error('Aquarium audio: '+String(error)));buildTank();buildPlants();for(const f of tank.fish)createFish(f);for(let i=0;i<tank.dreams;i++)dreamObject(i);for(let i=0;i<50;i++)pelletVisuals.push(mesh(smallSphere,pelletMat,0,-10,0,.035,.027,.035));for(let i=9;i<tank.plants;i++)plant((Math.random()-.5)*11,(Math.random()-.5)*4,false);aquariumWater=new AquariumWater();aquariumWater.setQuality(frame().quality);residents=new Invertebrates(substrate!,tank);habitatGarden=new HabitatGarden(substrate!);habitatGarden.update(tank);setCamera();setBusy(null);setReady(true);});
+onAction(e=>{if(!e.pressed)return;if(e.action==='options')__l10nOptions();else if(e.action==='target_feed')notebookAction('target-feed');else if(e.action==='notebook'){notebook.open=!notebook.open;showHelp=false;}else if(e.action==='pause')speed=speed===0?1:0;else if(e.action==='help'){showHelp=!showHelp;notebook.open=false;}else doAction(e.action);});
+setReady(false,{label:__displayText('Loading the living aquarium'),seconds:120});
+onStart(async()=>{setBusy(__displayText('Preparing the living aquarium'),{seconds:120});setFixedRate(30);await prepareFishModels(frame().quality);void prepareSound().catch(error=>console.error('Aquarium audio: '+String(error)));buildTank();buildPlants();for(const f of tank.fish)createFish(f);for(let i=0;i<tank.dreams;i++)dreamObject(i);for(let i=0;i<50;i++)pelletVisuals.push(mesh(smallSphere,pelletMat,0,-10,0,.035,.027,.035));for(let i=9;i<tank.plants;i++)plant((Math.random()-.5)*11,(Math.random()-.5)*4,false);aquariumWater=new AquariumWater();aquariumWater.setQuality(frame().quality);residents=new Invertebrates(substrate!,tank);habitatGarden=new HabitatGarden(substrate!);habitatGarden.update(tank);setCamera();setBusy(null);setReady(true);});
 onFixedUpdate(dt=>{time+=dt;saveClock+=dt;if(speed>0){const wasReady=tank.nursery?.ready,broodReady=tank.ecology.brood?.ready;advance(tank,dt,speed);if(tank.nursery?.ready&&!wasReady){notify('The nursery has hatched. Open Notebook to welcome two juveniles.');sound('dream');save();}if(tank.ecology.brood?.ready&&!broodReady){notify('The shrimp brood is ready. Visit Habitat / Colony.');sound('dream');save();}swim(tank,dt*Math.min(speed,3),time);substrate?.update(dt);residents?.update(dt,time,tank);}if(saveClock>12){save();saveClock=0;}});
-onRender(()=>{lightOn=lightPreview==='auto'?isDay(tank):lightPreview==='day';sun.intensity=lightOn?2.8:.3;glow.color.set(lightOn?0xbbeeca:0x739fdb);glow.intensity=lightOn?8+tank.aerator:5;updateGraphics();setCamera();animateFish(time,speed===0);aquariumWater?.update(time,camera,lightOn,tank.aerator);if(filterBody){filterBody.scale.set(.65+tank.filter*.07,1.6+tank.filter*.22,.65+tank.filter*.07);filterBody.position.y=.95+tank.filter*.11;}
+onRender(__l10nRender(()=>{lightOn=lightPreview==='auto'?isDay(tank):lightPreview==='day';sun.intensity=lightOn?2.8:.3;glow.color.set(lightOn?0xbbeeca:0x739fdb);glow.intensity=lightOn?8+tank.aerator:5;updateGraphics();setCamera();animateFish(time,speed===0);aquariumWater?.update(time,camera,lightOn,tank.aerator);if(filterBody){filterBody.scale.set(.65+tank.filter*.07,1.6+tank.filter*.22,.65+tank.filter*.07);filterBody.position.y=.95+tank.filter*.11;}
  for(let i=0;i<pelletVisuals.length;i++){const p=tank.pellets[i],m=pelletVisuals[i];m.visible=!!p;if(p)m.position.set(p.x,p.y,p.z);if(p){m.scale.setScalar(p.kind==='greens'?.07:p.kind==='sinking'?.034:.027);m.material=pelletMat;}}
  for(let i=0;i<plants.length;i++){const maturity=i<14||i>=32?.8+tank.plantGrowth*.35:.4;plants[i].scale.setScalar(maturity);plants[i].rotation.z=Math.sin(time*.6+i*.7)*.025;plants[i].rotation.x=Math.sin(time*.45+i)*.025;}
  habitatGarden?.update(tank);
  nurseryEggs.visible=!!tank.nursery;nurseryEggs.scale.setScalar(tank.nursery?.ready?1.3:1);
  const watched=selected>=0?tank.fish[selected]:undefined;selectionHalo.visible=!!watched||!!selectedResident;if(watched)selectionHalo.position.set(watched.x,watched.y-.18,watched.z);else if(selectedResident)selectionHalo.position.copy(selectedResident.root.position);
  for(let i=0;i<dreamObjects.length;i++){const d=dreamObjects[i];d.rotation.y=time*.18;d.position.y=(i===0?3.2:i===1?3.9:4.2)+Math.sin(time*.7+i)*.14;}
- hud();});
+ hud();}));
 onSuspend(save);onQuit(save);
+
+// localization-runtime:menu
+import { installLanguageMenu as __installLanguageMenu } from "./l10n/menu.js";
+__installLanguageMenu(false);

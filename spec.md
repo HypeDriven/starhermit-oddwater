@@ -106,3 +106,21 @@ Version 1.3 published on 2026-11-07 from source commit `9ee0bf7`. All 50 indexed
 Version 1.3.1 adds species-specific shrimp and snail scattering. Strict TypeScript and the official 120-frame package check pass. An isolated scene renders the actual four resident meshes with front/back lighting and scattering toggled; image comparisons confirm visible transmission for cherry shrimp, Amano shrimp, nerite flesh and ramshorn flesh, a stronger backlight response, and weaker mineral-shell scattering. The High-quality aquarium/day/night render also passes with caustics composed. Captures and comparison measurements are retained in `art/review/1.3.1/`; the review scene and script are under `tests/` and excluded from the shipped game.
 
 Version 1.3.1 published from `04ea100`; all 50 hosted runtime files and the library cover matched the release. Live desktop and phone browser checks passed with no game console errors or warnings. The publication receipt and `art/review/1.3.1/browser-production.json` record the verified build.
+
+<!-- display-localization:start -->
+
+### Display language
+
+Authored UI text, canvas labels, selector options and composed messages resolve through the packaged string catalog. Message keys are stable hashes, so long story passages fit the runtime’s string-key limit. Display translation preserves simulation and protocol values, interpolated player names and entered text. The source English catalog is shipped; additional languages are available only when their entire catalog has validated translations.
+
+The language panel opens with F2, saves the player’s choice and offers Automatic to follow the account or device language. Packaged script fonts apply to both native and browser text.
+
+<!-- display-localization:end -->
+
+<!-- regional-localization:start -->
+
+### Regional interface languages
+
+The string tables include complete regional variants for `en-SG`, `en-HK`, `en-BQ`, `fr-BE`, `de-BE`, `de-BR`, `es-CO`, `de-IT`, `fr-IT`, `es-CL`, `es-AR`, `es-EC`. These reuse the corresponding existing translations in their language family. The runtime can resolve the exact regional tag. Language selection is available from the game’s Options panel or F2 and is saved per player in `ui.language`. Changes apply during play. Additional national, regional and indigenous language packs are only shipped once every English message has a translation with intact placeholders and markup. Complete additional language tables: `nl-BE`, `nl-NL`, `ja-JP`, `zh-SG`, `ms-SG`, `ta-SG`, `zh-HK`, `yue-HK`, `fi-FI`, `sv-FI`, `ru-FI`, `et-EE`, `ru-EE`, `id-ID`, `vi-VN`, `da-DE`, `lb-BE`, `co-FR`, `eu-FR`, `ca-FR`, `oc-FR`, `sl-IT`, `fur-IT`, `ca-IT`, `oc-IT`, `ca-ES`, `eu-ES`, `gl-ES`, `su-ID`, `bew-ID`, `km-VN`.
+
+<!-- regional-localization:end -->

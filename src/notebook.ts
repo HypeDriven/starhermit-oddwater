@@ -1,3 +1,9 @@
+import { localizedStyle as __l10nStyle } from "./l10n/font.js";
+import { localizedDrawOptions as __l10nDrawOptions } from "./l10n/font.js";
+// localization-runtime:attached
+import { localizedFont as __l10nFont } from "./l10n/font.js";
+// display-localization:attached
+import { localizedText as __displayText, wrapDisplayText as __wrapDisplay, preserveUserText as __keepDisplayText } from "./l10n/text.js";
 import * as draw from 'starhermit:draw';
 import * as ui from 'starhermit:ui';
 import {foods,species,guide,harmony,advice,projectInfo,milestoneList,nurseryNeeds} from './simulation.js';
@@ -12,14 +18,14 @@ export function drawNotebook(s:Aquarium,w:number,h:number,scale:number,actions:N
  const compact=w<850,bw=Math.min(w-20,790),x=(w-bw)/2,y=compact?90:Math.max(92,(h-620)/2),bh=Math.max(360,Math.min(h-y-18,650));
  const ink='#e5ece1',muted='#9bb1a4',lime='#d4eda2',gold='#efd69b';
  const box=(a:number,b:number,c:number,d:number,color:string,r=0)=>draw.roundRect(a*scale,b*scale,c*scale,d*scale,r*scale,color);
- const text=(value:string,a:number,b:number,size=12,color=ink)=>draw.text(value,a*scale,b*scale,{size:size*scale,color,font:'sans-serif'});
+ const text=(value:string,a:number,b:number,size=12,color=ink)=>draw.text(__displayText(value),a*scale,b*scale,__l10nDrawOptions({size:size*scale,color,font:__l10nFont('sans-serif')}));
  const wrap=(value:string,a:number,b:number,width:number,size=12,color=muted)=>{
-  const words=value.split(' ');let line='',row=0;const limit=Math.floor(width/(size*.55));
-  for(const word of words){if((line+' '+word).length>limit&&line){text(line,a,b+row*(size+6),size,color);row++;line=word;}else line+=(line?' ':'')+word;}
-  if(line)text(line,a,b+row*(size+6),size,color);return (row+1)*(size+6);
+  const lines=__wrapDisplay(value,width,line=>draw.measureText(__displayText(__keepDisplayText(line)),__l10nDrawOptions({size:size*scale,font:__l10nFont('sans-serif')})).width/scale);
+  lines.forEach((line,i)=>text(line,a,b+i*(size+6),size,color));return Math.max(1,lines.length)*(size+6);
  };
+
  const button=(id:string,label:string,a:number,b:number,width:number,selected=false)=>{
-  let clicked=false;ui.area({x:a*scale,y:b*scale,width:width*scale,height:52*scale},()=>{clicked=ui.id('notebook-'+id).style(id.startsWith('tab')?'notebook-tab':'small').button(label,{selected});});return clicked;
+  let clicked=false;ui.area({x:a*scale,y:b*scale,width:width*scale,height:52*scale},()=>{clicked=ui.id('notebook-'+id).style(__l10nStyle(id.startsWith('tab')?'notebook-tab':'small')).button(__displayText(label),{selected});});return clicked;
  };
  box(0,78,w,h-78,'#03110db0');box(x,y,bw,bh,'#102f2bfc',15);
  text('THE KEEPER’S NOTEBOOK',x+18,y+17,compact?16:23,lime);
