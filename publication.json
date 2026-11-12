@@ -22,7 +22,7 @@
       "pinnedCommitSha": null,
       "deployedCommitSha": null,
       "deployError": null,
-      "deployedAt": "2026-11-08T09:36:25.381416+00:00",
+      "deployedAt": "2026-11-12T08:18:15.01869+00:00",
       "externalLaunchUrl": null,
       "engineVersion": "1.38.0",
       "deployWarning": null
@@ -36,15 +36,15 @@
     "links": [],
     "isDisabled": false
   },
-  "publishedAt": "2026-11-08T09:36:25.488Z",
-  "sourceCommit": "04ea1008e285b73cefdc8f3b6de8e1c694d8c59c",
-  "bytesReceived": 15052989,
-  "archiveSha256": "b72ce5539bfb7f0ef007806f75db6f60d0789ebc621ba12289e978d2e9b6d450",
+  "publishedAt": "2026-11-12T08:18:18.461Z",
+  "sourceCommit": "41e6ead865c80b77137dde1ed11302a0e93f6988",
+  "bytesReceived": 16635957,
+  "archiveSha256": "cad3fb739e1ebb3685ec08e3b728940b68795805a67d9223662a6da7f3ca0065",
   "result": {
     "clientPublished": true,
     "serverImageLoaded": false,
     "imageDigest": null,
-    "bytesReceived": 15052989,
+    "bytesReceived": 16635957,
     "mode": "replace",
     "filesRemoved": 0,
     "engineVersion": "1.38.0",
@@ -89,5 +89,71 @@
     "geometry and juvenile scale affect tissue thickness",
     "mineral shell response weaker than soft tissue",
     "High aquarium caustics and day/night lighting"
-  ]
+  ],
+  "indexSha256": "8fd735647f11352a23a625a02c5600e9c8c09cc6162b0ed8d707c9d116f165cf",
+  "liveVerification": {
+    "at": "2026-11-12T08:18:18.461Z",
+    "files": [
+      {
+        "file": "starhermit-files.json",
+        "sha256": "8fd735647f11352a23a625a02c5600e9c8c09cc6162b0ed8d707c9d116f165cf",
+        "status": 200
+      },
+      {
+        "file": "assets/localization/Japanese.otf",
+        "sha256": "79c71c383373493e6874248b4208b0445f06b8250ef1007132e592f6d2fc0c2f",
+        "status": 200
+      },
+      {
+        "file": "assets/localization/Khmer.ttf",
+        "sha256": "aa0dc26a3990442819dd3fa1b34050fc88f0122852a0493ce8bd4bd4ed1f2879",
+        "status": 200
+      },
+      {
+        "file": "assets/localization/SimplifiedChinese.otf",
+        "sha256": "b729030d19163d3b72371e3a6d0824d3d1e9d80fac4d8cea8bf1f74d4348a641",
+        "status": 200
+      },
+      {
+        "file": "assets/localization/Tamil.ttf",
+        "sha256": "479c5f10546654536f81de68fcf204546ed611a6ba51c33b58152f58daf345fa",
+        "status": 200
+      },
+      {
+        "file": "assets/localization/TraditionalChinese.otf",
+        "sha256": "bc2e0e9a93077515af6b4c891a043576a99039d6d26b760e85e51fde1a4f94c4",
+        "status": 200
+      },
+      {
+        "file": "assets/localization/common.json",
+        "sha256": "7a087def6396ef22fb3e4f293061cb8db12b460dca7b96f2bf65e1675be0186a",
+        "status": 200
+      },
+      {
+        "file": "assets/localization/fonts.json",
+        "sha256": "37beaea0dba54c9f2c45995cbf9fd19fad21719d701718c41d7e58dd7748ca13",
+        "status": 200
+      },
+      {
+        "file": "assets/localization/locales.json",
+        "sha256": "b50ae04f8fdc193aabb94ae29245b870eb003101645d6849ca9a1d1f6578fbfc",
+        "status": 200
+      },
+      {
+        "file": "assets/strings.json",
+        "sha256": "7e41d874601b56342bab10682f362295e0b45733c15f451debef48dcb8ca3c9d",
+        "status": 200
+      },
+      {
+        "file": "index.html",
+        "sha256": "6aedb879c659d0cfffeb375a8f5076cb5530f1186626c6abe2632af2e76c784f",
+        "status": 200
+      },
+      {
+        "file": "starhermit.txt",
+        "sha256": "3242fd66223e770eb97a2525dc0692db4d316c1b5d5aa0ed92133f3c4d9cdaaf",
+        "status": 200
+      }
+    ]
+  }
 }
