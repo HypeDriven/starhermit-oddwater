@@ -37,7 +37,7 @@
     "favicon.png": {"sha256": "a9c43ec5dc6ebb4bef0598b39bb835f37bfe2278becbef4a7e50f821e718ddba", "size": 2567},
     "favicon.svg": {"sha256": "5a39f8473e3c188345602a9197959efded6e1b9f0f97efdcb853910f25ba077b", "size": 606},
     "icon.png": {"sha256": "31b2ea560cc5bb0919349fc00380520ad2ce43a6ed144943108ab1b6a93da105", "size": 12492},
-    "index.html": {"sha256": "6aedb879c659d0cfffeb375a8f5076cb5530f1186626c6abe2632af2e76c784f", "size": 1933},
+    "index.html": {"sha256": "e36ee6b6f54113d01aa423c547f1bab18e71fa56e481e56aaeb2867c4c355b92", "size": 1933},
     "music/reverie.ogg": {"sha256": "6985bd5fef33e84e40e5368a47f951439a9ac6d4203f9a887f2fdafb1089d28d", "size": 1423444},
     "release-notes.md": {"sha256": "71d2ae628ad19863a64fce200b45d44fd6056abb23547dacf96616a49911ff91", "size": 1515},
     "sfx/aquarium.ogg": {"sha256": "aa66b8b8a10355846009d47394ab808b6c0636349191d7c6db2823ecb31be1be", "size": 190294},
@@ -67,7 +67,7 @@
     "src/water/caustics.ts": {"sha256": "9c8b7cf2ee0d7178e2a28e29d6593549d93b2f817e0d585f81909e7c0bfdf478", "size": 8011},
     "src/water/ocean-sim.ts": {"sha256": "2dca44851cf8c257799740d329dbd11bfe70651a0e673566adc4144b06100111", "size": 20970},
     "src/water/reflection.ts": {"sha256": "f4437225d4b14ad12c80c281195ba776635e825856ffaae98e80ab781b5ef1a3", "size": 4266},
-    "starhermit.txt": {"sha256": "3242fd66223e770eb97a2525dc0692db4d316c1b5d5aa0ed92133f3c4d9cdaaf", "size": 991}
+    "starhermit.txt": {"sha256": "c6e7b4f57901fbe2d3159b422485b33e8e44b06a14352064bc6ec0da8e459d00", "size": 991}
   },
   "excluded": ["README.md", "art/", "coverart.png", "package.json", "publication.json", "spec.md", "tests/", "tools/", "tsconfig.json"],
   "format": 1
