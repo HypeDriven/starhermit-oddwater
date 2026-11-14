@@ -1,5 +1,7 @@
 # Oddwater — a slightly impossible aquarium
 
+**[▶ Play Oddwater on StarHermit](https://dashboard.starhermit.com/play/141f9640-ec24-41b9-86b0-0115fd956448)**
+
 A 3D freshwater aquarium game built directly on **StarHermit Engine 1.39.0**. Keep a planted community tank thriving, get to know its residents, grow a nursery, and spend earned Wonder on equipment, fish, plants and three small impossibilities.
 
 ## The aquarium
