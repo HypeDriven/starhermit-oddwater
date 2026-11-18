@@ -13,6 +13,6 @@ expect Remembered
 touch Water
 expect 30% water changed
 save mobile
-key F10 2
+key F1 2
 expect Options
 save mobile-options

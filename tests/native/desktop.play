@@ -16,7 +16,7 @@ expect An orbiting pearl
 click ?
 expect Welcome to Oddwater
 click Back to the water
-key F10 2
+key F1 2
 expect Options
 save desktop-options
 key Escape 2
