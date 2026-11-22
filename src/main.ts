@@ -53,6 +53,7 @@ function updateGraphics(){
  const f=frame();if(graphicsLevel===f.level)return;graphicsLevel=f.level;
  const q=graphicsBudgets[f.quality],level=levelSettings();
  renderer.antialias=level.antialias;
+ renderer.motionBlur = q.bloom ? { intensity: 0.25, samples: 8, maxPixels: 16, targetFps: 60, camera: false } : null;
  renderer.shadowMap.enabled=q.shadow>0&&level.shadows;
  sun.castShadow=renderer.shadowMap.enabled;
  sun.shadow.mapSize=q.shadow||512;

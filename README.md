@@ -2,7 +2,7 @@
 
 **[▶ Play Oddwater on StarHermit](https://dashboard.starhermit.com/play/141f9640-ec24-41b9-86b0-0115fd956448)**
 
-A 3D freshwater aquarium game built directly on **StarHermit Engine 1.44.1**. Keep a planted community tank thriving, get to know its residents, grow a nursery, and spend earned Wonder on equipment, fish, plants and three small impossibilities.
+A 3D freshwater aquarium game built directly on **StarHermit Engine 1.47.0**. Keep a planted community tank thriving, get to know its residents, grow a nursery, and spend earned Wonder on equipment, fish, plants and three small impossibilities.
 
 ## The aquarium
 
@@ -50,7 +50,7 @@ At 1×, a simulated hour takes 80 seconds. Progress saves every 12 seconds, on c
 
 ## Run with StarHermit
 
-Download the official **1.44.1** developer runtime using the [engine tutorial](https://wiki.starhermit.com/docs/tutorials/starhermit-engine.html). Run these commands from this repository:
+Download the official **1.47.0** developer runtime using the [engine tutorial](https://wiki.starhermit.com/docs/tutorials/starhermit-engine.html). Run these commands from this repository:
 
 ```sh
 starhermit .

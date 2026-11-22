@@ -4,7 +4,7 @@ A peaceful 3D freshwater aquarium with a slightly impossible imagination. Tend a
 
 ## Release conventions
 
-The StarHermit listing is named **Oddwater**. `starhermit.txt` pins engine 1.44.1, declares keyboard/gamepad controls, and names `cover.jpg`. The official runtime generates `index.html` and `starhermit-files.json`; never hand-edit the loader. Both browser and native play use the same TypeScript source.
+The StarHermit listing is named **Oddwater**. `starhermit.txt` pins engine 1.47.0, declares keyboard/gamepad controls, and names `cover.jpg`. The official runtime generates `index.html` and `starhermit-files.json`; never hand-edit the loader. Both browser and native play use the same TypeScript source.
 
 - `cover.jpg`: 1200 × 675 landscape library art; the high-resolution original is `coverart.png` (development only).
 - `favicon.svg`, `favicon.png`: a pale lime and cyan fish, aquatic leaves and a gold pearl on deep teal; the generated loader names the raster favicon.
@@ -73,7 +73,7 @@ Save schema 2 uses the existing `oddwater-v1` storage slot. Migration accepts bo
 
 ## Packaging and publishing
 
-`npm run package` regenerates the loader and file index. Set `STARHERMIT` to another installed 1.44.1 runtime if needed. Type-check using the runtime's generated declarations and TypeScript 5 or later.
+`npm run package` regenerates the loader and file index. Set `STARHERMIT` to another installed 1.47.0 runtime if needed. Type-check using the runtime's generated declarations and TypeScript 5 or later.
 
 `npm run publish:starhermit` uses `../tools/upload-game.mjs`, the shared uploader, and credentials in `../.env`. It packages exactly the files indexed at a clean Git HEAD, creates the listing once, updates the existing game on subsequent releases, and records its ID, URL, source commit and archive hash in `publication.json`. Development documentation, tools, tests, the original cover and publication receipts stay out of the upload. Never ship credentials.
 
@@ -125,6 +125,10 @@ The string tables include complete regional variants for `en-SG`, `en-HK`, `en-B
 
 <!-- regional-localization:end -->
 
-## Engine 1.44.1
+## Engine 1.47.0
 
-Browser play uses the WebGPU-only StarHermit 1.44.1 web runtime. Automatic ray-traced shadows are enabled on supported Vulkan devices, with mapped-shadow fallbacks elsewhere. Packaging creates block-compressed runtime textures and compressed glTF copies, retaining original image fallbacks.
+Browser play uses the WebGPU-only StarHermit 1.47.0 web runtime. Automatic ray-traced shadows are enabled on supported Vulkan devices, with mapped-shadow fallbacks elsewhere. Packaging creates block-compressed runtime textures and compressed glTF copies, retaining original image fallbacks.
+
+Browser rendering uses the engine's asynchronous pipeline creation so newly encountered materials do not stall the page. Native play retains the engine's synchronous pipeline behavior.
+
+Higher graphics tiers use native per-object motion blur for moving pieces and effects. Camera motion stays sharp, lower tiers omit the effect, and the runtime's Motion blur and Reduce motion preferences remain authoritative.
