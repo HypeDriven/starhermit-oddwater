@@ -4,11 +4,11 @@ export type HabitatKind='bare'|'moss'|'leaves'|'cave';
 export interface Habitat{kind:HabitatKind;maturity:number;}
 export interface Neighbour{id:number;type:number;growth:number;energy:number;moult:number;rest:number;}
 export interface Ecology{habitats:Habitat[];colony:Neighbour[];nextId:number;brood:{hours:number;ready:boolean}|null;born:number;shared:number;moults:number;notes:string[];}
-export const habitats:Record<HabitatKind,{name:string;cost:number;detail:string}>={
- bare:{name:'Open gravel',cost:0,detail:'Open foraging ground. No shelter bonus; no upkeep.'},
- moss:{name:'Moss garden',cost:12,detail:'Grows into shelter for moulting shrimp and shrimplets. Mature at 35%.'},
- leaves:{name:'Leaf litter',cost:6,detail:'A slow food source for snails and nymphs. Decomposes over 48 tank hours; adds a little waste.'},
- cave:{name:'Pebble refuge',cost:16,detail:'Permanent shelter for resting grazers. Moss provides the finer cover needed for a shrimp brood.'},
+export const habitats:Record<HabitatKind,{name:string;detail:string}>={
+ bare:{name:'Open gravel',detail:'Open foraging ground. No shelter bonus; no upkeep.'},
+ moss:{name:'Moss garden',detail:'Grows into shelter for moulting shrimp and shrimplets. Mature at 35%.'},
+ leaves:{name:'Leaf litter',detail:'A slow food source for snails and nymphs. Decomposes over 48 tank hours; adds a little waste.'},
+ cave:{name:'Pebble refuge',detail:'Permanent shelter for resting grazers. Moss provides the finer cover needed for a shrimp brood.'},
 };
 export const habitatPositions=[{x:-4.7,z:1.35},{x:0,z:1.65},{x:4.7,z:1.35}];
 export const neighbours=[
@@ -43,8 +43,8 @@ function log(s:Aquarium,text:string){s.log.push({hour:s.hours,text});if(s.log.le
 export function setHabitat(s:Aquarium,slot:number,kind:HabitatKind){
  const h=s.ecology.habitats[slot];if(!h||!Object.hasOwn(habitats,kind))return 'Choose a habitat and a bed.';
  if(h.kind===kind&&!(kind==='leaves'&&h.maturity<.5))return 'That habitat is already in place.';
- const p=habitats[kind];if(s.wonder<p.cost)return `This habitat needs ${p.cost} Wonder.`;
- s.wonder-=p.cost;h.kind=kind;h.maturity=kind==='moss'?.15:kind==='bare'?0:1;log(s,`${['Left','Middle','Right'][slot]} bed: ${p.name.toLowerCase()}.`);return `${p.name} placed in the ${['left','middle','right'][slot]} bed.`;
+ const p=habitats[kind];
+ h.kind=kind;h.maturity=kind==='moss'?.15:kind==='bare'?0:1;log(s,`${['Left','Middle','Right'][slot]} bed: ${p.name.toLowerCase()}.`);return `${p.name} placed in the ${['left','middle','right'][slot]} bed.`;
 }
 export function shelter(e:Ecology){return e.habitats.reduce((n,h)=>n+(h.kind==='cave'?1:h.kind==='moss'?h.maturity:0),0);}
 export function broodNeeds(s:Aquarium,quality:number){
@@ -57,7 +57,7 @@ export function broodNeeds(s:Aquarium,quality:number){
 }
 export function startBrood(s:Aquarium,quality:number){
  if(s.ecology.brood)return 'A shrimp brood is already sheltered.';const need=broodNeeds(s,quality);if(need)return need;
- if(s.wonder<12)return 'Sheltering a brood needs 12 Wonder.';s.wonder-=12;s.ecology.brood={hours:0,ready:false};log(s,'A cherry shrimp brood is sheltered in the moss.');return 'Keep the moss and water settled for 16 tank hours.';
+ s.ecology.brood={hours:0,ready:false};log(s,'A cherry shrimp brood is sheltered in the moss.');return 'Keep the moss and water settled for 16 tank hours.';
 }
 export function welcomeShrimp(s:Aquarium){
  if(!s.ecology.brood?.ready)return 'The shrimp brood needs more settled tank hours.';
@@ -84,7 +84,7 @@ export function recordBehaviour(s:Aquarium,id:number,day:boolean){
  const n=s.ecology.colony.find(n=>n.id===id);if(!n)return 'Choose a resident to watch.';const note=noteFor(s,n,day);
  if(!note)return 'Watch for a meal, night rest, a moult or a shrimplet.';
  if(s.ecology.notes.includes(note))return 'This behavior is already in your field notes.';
- s.ecology.notes.push(note);s.wonder+=5;log(s,`Field note: ${fieldNotes.find(f=>f.id===note)!.title}. +5 Wonder.`);return 'Behavior recorded in the field notes. +5 Wonder.';
+ s.ecology.notes.push(note);log(s,`Field note: ${fieldNotes.find(f=>f.id===note)!.title}.`);return 'Behavior recorded in the field notes.';
 }
 export function advanceEcology(s:Aquarium,h:number,quality:number,day:boolean){
  const e=s.ecology;

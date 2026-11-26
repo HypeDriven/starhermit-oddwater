@@ -1,8 +1,8 @@
-# Oddwater — a slightly impossible aquarium
+# Oddwater — a living aquarium
 
 **[▶ Play Oddwater on StarHermit](https://dashboard.starhermit.com/play/141f9640-ec24-41b9-86b0-0115fd956448)**
 
-A 3D freshwater aquarium game built directly on **StarHermit Engine 1.47.0**. Keep a planted community tank thriving, get to know its residents, grow a nursery, and spend earned Wonder on equipment, fish, plants and three small impossibilities.
+A 3D freshwater aquarium game built directly on **StarHermit Engine 1.47.0**. Keep a planted community tank thriving, get to know its residents, grow a nursery, and watch it all through a cinematic camera when you step away.
 
 ## The aquarium
 
@@ -10,7 +10,9 @@ Start with eight neon tetras, six harlequin rasboras, four peppered corys and on
 
 The simulation tracks hunger, fish health, organic waste, ammonia, nitrite, nitrate, dissolved oxygen, algae and biological filtration. Uneaten food becomes waste. Filter bacteria process ammonia into nitrite and nitrate; plants take up nitrate, and water changes dilute it.
 
-Healthy fish earn **Wonder**. Complete the keeper's journal, welcome new fish groups, add plants, and awaken an orbiting pearl, an underwater moon and an upside-down tea party.
+Complete the keeper's journal, welcome new fish groups and add plants as the tank allows. Nothing costs currency; capacity and water conditions are the only limits.
+
+After 45 seconds without input (or Watch / V) a **cinematic tour** starts (`src/cinematic.ts`, adapted from SimPond's): the HUD fades behind letterbox bars and the camera alternates between the whole tank (push-in, arc, a dolly along the gravel, the end glass, a crane over the surface, light on the water) and its inhabitants (a fish tracked along the glass, the largest school, a cory at gravel level, a shrimp/snail/insect close-up). Every shot is filmed from outside the glass with long lenses, rule-of-thirds framing with lead room, critically damped springs and a dip to black for long moves; High/Ultra add focused depth of field. Any input eases back to the orbit camera.
 
 The scene includes a voxel collision simulation for 3,000 pebbles, swaying translucent leaves, textured driftwood and rocks, and the StarHermit engine’s GPU FFT water, focused caustics, planar reflections, refraction and light shafts on High/Ultra. Fresnel-shaded filter bubbles rise and wobble before sending ripples across the surface.
 
@@ -22,9 +24,9 @@ Turn Sound on for MOSS aquarium ambience and care sounds, plus a 90-second YuE i
 
 Open **Notebook** or press **J**. Flakes reach the schools, sinking pellets reach corys, and algae wafers feed shrimp and snails. Use Place food (or T) to choose where a meal lands. Upgrade and rinse the filter, improve aeration, and balance a real day/night light schedule against plant growth and algae.
 
-Mature stems yield cuttings for free planting. With 11 plants, improved filtration, a settled school and calm water, prepare a nursery for 18 Wonder. Eggs need 12 calm tank hours; welcome the juveniles, then watch them grow. Named fish gain trust when fed. Inspect all ten species for the field guide, complete repeating keeper projects and milestones, and read your tank’s dated log.
+Mature stems yield cuttings for free planting. With 11 plants, improved filtration, a settled school and calm water, prepare a nursery. Eggs need 12 calm tank hours; welcome the juveniles, then watch them grow. Named fish gain trust when fed. Inspect all ten species for the field guide, complete repeating keeper projects and milestones, and read your tank’s dated log.
 
-Fish can be renamed in their inspection card. Rehoming requires confirmation and keeps minimum social groups together, leaving room for later generations. Existing aquariums migrate automatically without losing their fish, Wonder, plants, dreams or journal rewards.
+Fish can be renamed in their inspection card. Rehoming requires confirmation and keeps minimum social groups together, leaving room for later generations. Existing aquariums migrate automatically without losing their fish, plants or progress; Wonder and dreams from older saves are dropped.
 
 Open **Habitat** in the notebook to arrange three small beds: growing moss, decomposing leaf litter, permanent pebble refuges or open gravel. Residents seek their preferred feeding and resting places. Mature moss and settled water support cherry shrimp broods; welcome the shrimplets, watch them grow, and share extra adults while keeping four breeders. Patient observation earns four behavior field notes: meals, night rest, moulting and young.
 
@@ -38,15 +40,15 @@ Open **Habitat** in the notebook to arrange three small beds: growing moss, deco
 | Feed the selected food | F or Feed button |
 | Keeper notebook: care, habitats, goals, guide and log | J or Notebook button |
 | Change 30% of the water | W or Water change button |
-| Plant | P or Plant button; costs 8 Wonder |
-| Awaken a dream | D or Dream button |
+| Plant | P or Plant button |
+| Cinematic tour | V or Watch button; starts by itself after 45 s idle |
 | Pause | Space or pause button |
 | Time speed | 1×, 5×, 20× buttons |
 | Instructions | Help button; H on keyboard |
 | Graphics, sound, controls and accessibility | Gear button; F1 or F10 |
 | Mobile journal and fish shop | Tank notes → Journal / Fish |
 
-At 1×, a simulated hour takes 80 seconds. Progress saves every 12 seconds, on care/reward actions, and when the game is suspended or closed. There is no offline time catch-up.
+At 1×, a simulated hour takes 80 seconds. Progress saves every 12 seconds, on care actions, and when the game is suspended or closed. There is no offline time catch-up.
 
 ## Run with StarHermit
 
@@ -91,11 +93,12 @@ npx --package typescript tsc -p .
 - `src/ecology.ts` — persistent microhabitats, resident growth, moults, shrimp broods and behavior discoveries.
 - `src/habitats.ts` — visible moss, leaf litter and refuges.
 - `src/simulation.ts` — aquarium chemistry, fish state, food and schooling movement.
-- `src/main.ts` — scene geometry, materials, fish animation, input, HUD, care tools, journal, fish shop, dreams, audio and saves.
+- `src/main.ts` — scene geometry, materials, fish animation, input, HUD, care tools, journal, fish shop, audio and saves.
+- `src/cinematic.ts` — the idle cinematic tour.
 - `starhermit.txt` — engine pin, entry module, capabilities and action bindings.
 - `index.html` and `starhermit-files.json` — official web loader and generated package index.
 
-The nitrogen cycle is a forgiving, accelerated game approximation. Fish use generated textured models; invertebrates are procedural. temperature is maintained at 25 °C by the simulated heater. Purchases use earned in-game Wonder. Progress is stored locally; this build does not provide online multiplayer or cloud saves.
+The nitrogen cycle is a forgiving, accelerated game approximation. Fish use generated textured models; invertebrates are procedural. temperature is maintained at 25 °C by the simulated heater. Progress is stored locally; this build does not provide online multiplayer or cloud saves.
 
 ## Validation
 

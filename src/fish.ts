@@ -1,7 +1,7 @@
 import type {QualityTier} from 'starhermit:engine';
 import {GLTFLoader,Group,Mesh,MeshStandardMaterial,DoubleSide} from 'starhermit:scene';
 import type {Fish} from './simulation.js';
-import {species,clamp} from './simulation.js';
+import {species,clamp,quirk} from './simulation.js';
 import {submergedHooks} from './water/aquarium.js';
 import {fishScattering} from './tissue.js';
 const ids=['neon-tetra','harlequin-rasbora','peppered-cory','pearl-gourami'];
@@ -64,6 +64,6 @@ export function animateFish(time:number,paused:boolean){
   const target=Math.atan2(-f.vz,f.vx);let diff=target-v.yaw;
   while(diff>Math.PI)diff-=Math.PI*2;while(diff< -Math.PI)diff+=Math.PI*2;
   v.yaw+=diff*.09;v.root.rotation.set(0,v.yaw,clamp(f.vy*.4,-.3,.3));
-  if(!paused)v.phase.value=time*(7+species[f.type]!.speed*4)+f.phase;
+  if(!paused)v.phase.value=time*(7+species[f.type]!.speed*4)*(1+.12*quirk(f.id,3))+f.phase;
  }
 }

@@ -4,15 +4,19 @@ frames 40
 expect ODDWATER
 click Feed
 expect Dinner is served
-click Collect +12
-frames 2
-expect Remembered
+expect Done.
 click Water change
 expect 30% water changed
 click Plant
 expect A new plant takes root
-click Dream
-expect An orbiting pearl
+click Watch
+frames 30
+expect Move, tap or press any key to return
+frames 400
+save desktop-tour
+click 720 450
+frames 120
+expect ODDWATER
 click ?
 expect Welcome to Oddwater
 click Back to the water

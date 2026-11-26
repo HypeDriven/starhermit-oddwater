@@ -4,7 +4,7 @@ frames 20
 key KeyJ 2
 click Serve a small meal
 key KeyJ 2
-click Collect +12
+expect Done.
 frames 2
 key KeyJ 2
 click Sinking pellets
@@ -13,17 +13,17 @@ click Algae wafer
 click Serve a small meal
 click Goals
 expect A meal at every depth
-click Collect project reward
+click Complete project
 frames 2
 expect The cutting exchange
 click Care
 click Equipment
-click More media
+click Add filter media
 frames 2
 expect level 2
 click Plants & nursery
-click Plant · 8 Wonder
-click Plant · 8 Wonder
+click Add a plant
+click Add a plant
 click Prepare nursery
 frames 2
 expect Neon tetra nursery
@@ -31,6 +31,8 @@ save progression-eggs
 key KeyJ 2
 click 20×
 frames 1500
+key ShiftLeft 2
+frames 100
 key KeyJ 2
 expect Neon tetra nursery
 expect Two juveniles are ready

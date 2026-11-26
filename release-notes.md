@@ -1,3 +1,13 @@
+# 1.4.0 — Just the tank
+
+Oddwater is now a pure fish-tank simulator.
+
+- **No more Wonder or dreams.** Fish groups, plants, equipment, habitats, nurseries and shrimp broods no longer cost anything; they are limited only by the tank's capacity and conditions. The orbiting pearl, underwater moon and tea party are gone. Journal tasks, milestones and keeper projects remain as goals without rewards.
+- **Cinematic tour.** After 45 seconds without input (or with Watch / V) the interface fades away and the camera alternates between wide views of the tank and following its inhabitants: a fish along the glass, a whole school, a cory nosing the gravel, a shrimp or the nerite on the glass. Shots use long lenses, rule-of-thirds framing with lead room, captions and, on High/Ultra, depth of field. Any input hands the camera back.
+- **Livelier schools.** Each fish has its own cruising pace, tail-beat rate and attachment to its school, so schools no longer move in lockstep.
+
+Existing aquariums keep their fish, plants, residents, habitats and progress.
+
 # 1.3.1 — Light through little lives
 
 Shrimp and snails now have dedicated subsurface scattering. Light filters through thin legs, antennae and snail feelers, with warmer diffusion through their bodies and a subtle response on mineral shells. Tissue thickness follows each part’s geometry and juvenile growth, and the effect combines with the tank’s water caustics.

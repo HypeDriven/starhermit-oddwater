@@ -7,9 +7,7 @@ expect Dinner is served
 touch Tank notes
 touch Journal
 expect The keeper’s journal
-touch Collect +12
-frames 2
-expect Remembered
+expect Done.
 touch Water
 expect 30% water changed
 save mobile

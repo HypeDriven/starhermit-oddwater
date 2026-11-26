@@ -4,30 +4,34 @@ frames 20
 key KeyJ 2
 click Habitat
 expect Small places, different lives
-click Moss garden · 12 W
+click Moss garden
 frames 2
 expect Moss garden placed
 click Middle bed
-click Leaf litter · 6 W
+click Leaf litter
 frames 2
 expect Leaf litter placed
 save ecology-layout
 click Colony
 expect 7 / 13 shrimp
-click Shelter brood · 12 W
+click Shelter a brood
 frames 2
 expect Grow a moss bed
 key KeyJ 2
 click 20×
 frames 1800
+key ShiftLeft 2
+frames 100
 key KeyJ 2
 click Colony
-click Shelter brood · 12 W
+click Shelter a brood
 frames 2
 expect Cherry brood
 save ecology-brood
 key KeyJ 2
 frames 2000
+key ShiftLeft 2
+frames 100
 key KeyJ 2
 click Welcome shrimplets
 frames 2
@@ -50,13 +54,15 @@ save ecology-notes
 click Colony
 key KeyJ 2
 frames 3600
+key ShiftLeft 2
+frames 100
 key KeyJ 2
 click Share two adults
 frames 2
 expect 7 / 13 shrimp
 expect Two grown shrimp shared
 save ecology-shared
-click Shelter brood · 12 W
+click Shelter a brood
 frames 2
 expect Cherry brood
 save ecology-next-generation

@@ -15,7 +15,7 @@ expect A small sprinkle
 key KeyJ 2
 click Equipment
 expect Biological filter
-click More media
+click Add filter media
 frames 2
 expect level 2
 click Nursery
@@ -26,7 +26,7 @@ expect A meal at every depth
 save notebook-goals
 click Guide
 expect FIELD GUIDE
-click Observe +3
+click Observe
 frames 2
 expect Neon tetra
 save notebook-observation

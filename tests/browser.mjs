@@ -67,7 +67,7 @@ try{
   await page.getByRole('button',{name:/Prepare nursery/}).waitFor({state:'attached',timeout:10000});
   await page.screenshot({path:join(shots,`${name}-notebook-nursery.png`),timeout:60000});
   await clickButton('Habitat');
-  await clickButton(/^(Moss|Moss garden) · 12 W$/);
+  await clickButton(/^(Moss|Moss garden)$/);
   await page.getByRole('button',{name:'Colony',exact:true}).waitFor({state:'attached',timeout:10000});
   await page.screenshot({path:join(shots,`${name}-habitat-layout.png`),timeout:60000});
   await clickButton('Colony');
