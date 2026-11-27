@@ -63,3 +63,11 @@ test('rehoming makes space, preserves a social group and keeps new fish IDs dist
 test('school quirks are steady per fish, bounded and not all alike',()=>{
  const values=[0,1,2,3,4,5,6,7].map(id=>quirk(id,1));assert.ok(values.every(v=>v>=-1&&v<=1));assert.equal(quirk(3,1),quirk(3,1));assert.ok(new Set(values.map(v=>v.toFixed(3))).size>6);
 });
+test('fish steer round rocks, driftwood and the filter instead of passing through them',async()=>{
+ const {contact}=await import('../src/obstacles.ts');const {species}=await import('../src/simulation.ts');
+ const s=newAquarium();s.filter=2;addFish(s,0,4);addFish(s,1,6);let worst=0,inside=0;
+ for(let i=0;i<6000;i++){swim(s,1/30,i/30);if(i%200===0)feed(s,(i%7)-3,0,i%3?'sinking':'flakes');
+  for(const f of s.fish){const half=species[f.type].size*1.42*(.35+.65*f.growth)*.5,pad=half*.36,sp=Math.hypot(f.vx,f.vy,f.vz)||1;
+   for(const along of [.8,0,-.8]){const c=contact(f.x+f.vx/sp*half*along,f.y+f.vy/sp*half*along,f.z+f.vz/sp*half*along,pad,s.filter);if(c){worst=Math.max(worst,c.depth);if(c.depth>.03)inside++;}}}}
+ assert.ok(worst<.08,'deepest penetration '+worst.toFixed(3));assert.ok(inside<20,'samples inside '+inside);
+});

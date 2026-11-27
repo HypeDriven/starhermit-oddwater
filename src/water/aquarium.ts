@@ -156,6 +156,7 @@ export class AquariumWater{
    this.matrix.compose(this.position,this.rotation,this.scale);this.bubbles.setMatrixAt(i,this.matrix);
    if(age>4.96&&i%8===0&&frame().frame%10===0)this.ripple(this.position.x,this.position.z,.009);
   }
+  this.bubbles.instanceMatrix.needsUpdate=true;
   const advanced=this.quality==='high'||this.quality==='ultra';
   if(advanced&&this.sim&&this.caustics&&this.reflection){
    const stride=this.quality==='ultra'?2:4;

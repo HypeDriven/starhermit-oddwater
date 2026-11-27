@@ -4,7 +4,7 @@ A peaceful 3D freshwater aquarium simulator. Tend a planted 180 L community tank
 
 ## Release conventions
 
-The StarHermit listing is named **Oddwater**. `starhermit.txt` pins engine 1.47.0, declares keyboard/gamepad controls, and names `cover.jpg`. The official runtime generates `index.html` and `starhermit-files.json`; never hand-edit the loader. Both browser and native play use the same TypeScript source.
+The StarHermit listing is named **Oddwater**. `starhermit.txt` pins engine 1.53.0, declares keyboard/gamepad controls, and names `cover.jpg`. The official runtime generates `index.html` and `starhermit-files.json`; never hand-edit the loader. Both browser and native play use the same TypeScript source.
 
 - `cover.jpg`: 1200 × 675 landscape library art; the high-resolution original is `coverart.png` (development only).
 - `favicon.svg`, `favicon.png`: a pale lime and cyan fish, aquatic leaves and a gold pearl on deep teal; the generated loader names the raster favicon.
@@ -17,7 +17,9 @@ The StarHermit listing is named **Oddwater**. `starhermit.txt` pins engine 1.47.
 
 The original four fish species now use distinct FLUX.2 klein references reconstructed by TRELLIS image-large. Source images, masters and generation receipts live in `art/fish/sources/`; `tools/remaster/fish.json` records prompts and seeds. The preparation pipeline normalizes the actual model axes to +X forward, repairs texture format to PNG, and uses UV-preserving mesh simplification. Models and textures are shared between fish; each fish has an independent continuous body/tail bending phase. Live graphics changes replace the models while retaining the simulation.
 
-The tank includes seven cherry/Amano shrimp, three nerite/ramshorn snails and three aquatic insects (mayfly nymphs and a water boatman). They walk, graze, swim and paddle independently. The nerite climbs the front glass. Clicking a resident opens its species card. Grazers make a small contribution to algae and leftover-food removal.
+The tank includes seven cherry/Amano shrimp, three nerite/ramshorn snails and three aquatic insects (mayfly nymphs and a water boatman). They walk, graze, swim and paddle independently. The nerite climbs the front glass.
+
+**Snails** (`src/snails.ts`, ported from SimPond's `life/shells.rs`): each shell is grown by Raup's coiling model (aperture outline swept round the axis, shrinking by W^(θ/2π), inner edge at share D, translation T, aperture shape S, shoulder, tilt and lean; wall thickness, a rolled lip, a closed apex) and painted by one shell program from shell coordinates in the `custom` and `uv` attributes: flames, spiral bands, mottle, growth lines and a paler glossy inside. The zebra nerite uses SimPond's river-nerite form (low spire, huge last whorl, D-shaped aperture) in olive-gold with dense black zigzag flames, about 0.3 units long; the great ramshorn (Planorbarius) is planispiral, red-brown, about 0.36 units across. The soft body (flat-soled foot reaching behind the shell, head, snout, tentacles, eyes) is one mesh per species whose vertex hook animates pedal waves travelling forward along the sole (also drawn as moving dark bands), the head scanning and dipping to rasp while grazing, waving tentacles, the fore-body bending into turns and the whole body withdrawing into the shell. The nerite crawls over the inside of the front glass, sole to the glass, wandering with pauses to graze; ramshorns creep over the gravel with the sole following its slope, browse leaf litter or a wafer, keep a shell's width apart, and at night withdraw and lower the shell to rest. Juveniles scale with growth. Clicking a resident opens its species card. Grazers make a small contribution to algae and leftover-food removal.
 
 ### Water and tissue lighting
 
@@ -81,7 +83,7 @@ Schools are not in lockstep (after SimPond's `fish::quirk`): from its ID each fi
 
 ## Packaging and publishing
 
-`npm run package` regenerates the loader and file index. Set `STARHERMIT` to another installed 1.47.0 runtime if needed. Type-check using the runtime's generated declarations and TypeScript 5 or later.
+`npm run package` regenerates the loader and file index. Set `STARHERMIT` to another installed 1.53.0 runtime if needed. Type-check using the runtime's generated declarations and TypeScript 5 or later.
 
 `npm run publish:starhermit` uses `../tools/upload-game.mjs`, the shared uploader, and credentials in `../.env`. It packages exactly the files indexed at a clean Git HEAD, creates the listing once, updates the existing game on subsequent releases, and records its ID, URL, source commit and archive hash in `publication.json`. Development documentation, tools, tests, the original cover and publication receipts stay out of the upload. Never ship credentials.
 
@@ -133,10 +135,12 @@ The string tables include complete regional variants for `en-SG`, `en-HK`, `en-B
 
 <!-- regional-localization:end -->
 
-## Engine 1.47.0
+## Engine 1.53.0
 
-Browser play uses the WebGPU-only StarHermit 1.47.0 web runtime. Automatic ray-traced shadows are enabled on supported Vulkan devices, with mapped-shadow fallbacks elsewhere. Packaging creates block-compressed runtime textures and compressed glTF copies, retaining original image fallbacks.
+Browser play uses the WebGPU-only StarHermit 1.53.0 web runtime. Automatic ray-traced shadows are enabled on supported Vulkan devices, with mapped-shadow fallbacks elsewhere. Packaging creates block-compressed runtime textures and compressed glTF copies, retaining original image fallbacks.
 
 Browser rendering uses the engine's asynchronous pipeline creation so newly encountered materials do not stall the page. Native play retains the engine's synchronous pipeline behavior.
 
 Higher graphics tiers use native per-object motion blur for moving pieces and effects. Camera motion stays sharp, lower tiers omit the effect, and the runtime's Motion blur and Reduce motion preferences remain authoritative.
+
+On engine 1.53.0, browser play through WebGL 2 compiles a frame's shader programs together and holds that frame until they are linked, blends skinned meshes in one pass, reuses the window pass's depth, and uses a hardware WebGL 2 context when WebGPU's adapter is software.

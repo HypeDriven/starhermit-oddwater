@@ -28,6 +28,7 @@ import {setHabitat,startBrood,welcomeShrimp,shareShrimp,recordBehaviour,noteFor,
 import type {HabitatKind} from './ecology.js';
 import {notebook,drawNotebook} from './notebook.js';
 import {Cinematic} from './cinematic.js';
+import {rocks,branches} from './obstacles.js';
 import type {CinematicView} from './cinematic.js';
 
 let tank=newAquarium();
@@ -74,10 +75,8 @@ function buildTank(){
  for(const z of [-3.1,3.1]){mesh(box,rim,0,6.05,z,14.3,.06,.06);mesh(box,rim,0,.02,z,14.3,.06,.06);}
  const strip=new MeshBasicMaterial({color:0xd3f6cd});mesh(box,strip,0,6.3,-.3,10,.045,.16);branch(new Vector3(-5.1,6.05,-3),new Vector3(-5.1,6.3,-.3),.025,.025,rim);branch(new Vector3(5.1,6.05,-3),new Vector3(5.1,6.3,-.3),.025,.025,rim);
  substrate=new Gravel();scene.add(substrate.mesh);
- for(let i=0;i<8;i++){const rock=new SphereGeometry(1,24,16);const ra=rock.getAttribute('position')!;const a=ra.array;for(let j=0;j<a.length;j+=3){const n=1+.1*Math.sin(a[j]*8+a[j+2]*4)+.065*Math.cos(a[j+1]*11-a[j+2]*7);a[j]*=n;a[j+1]*=n;a[j+2]*=n;}rock.computeVertexNormals();const rm=material([0x545e50,0x6b7460,0x414e45][i%3],.98);rm.hooks=submergedHooks({surface:`fn surface(s: Surface) -> Surface {var o=s;let p=s.world*35.0;let grain=sin(p.x+sin(p.z*1.8))*sin(p.y+p.z)*.07+sin(s.world.y*30.0+s.world.x*12.0)*.055;o.base_color=vec4f(s.base_color.rgb*(.8+grain),s.base_color.a);return o;}`});const m=mesh(rock,rm,Math.sin(i*5.2)*2+.8,.35+Math.random()*.25,Math.cos(i*3.7)*1.1-.6,.5+Math.random()*.5,.4+Math.random()*.6,.5+Math.random()*.4);m.rotation.set(.3*i,.4*i,.2*i);}
- const points=[[-4,.1,-.3],[-3.5,.8,-.5],[-2.4,1.5,-.5],[-1.1,2.1,-.7],[.2,2.7,-.8],[1.1,3.1,-1.2],[2.2,3.4,-1.5]];
- for(let i=1;i<points.length;i++)branch(new Vector3(...points[i-1] as [number,number,number]),new Vector3(...points[i] as [number,number,number]),.28-i*.025,.25-i*.026);
- branch(new Vector3(-1,2.2,-.7),new Vector3(-.2,3.4,-1),.11,.025);branch(new Vector3(-2.5,1.4,-.5),new Vector3(-3.2,2.7,-1.4),.12,.03);branch(new Vector3(-3.4,.8,-.5),new Vector3(-4.7,.15,1.1),.16,.04);branch(new Vector3(.3,2.7,-.8),new Vector3(2.6,.2,-1),.13,.07);
+ for(let i=0;i<8;i++){const rock=new SphereGeometry(1,24,16);const ra=rock.getAttribute('position')!;const a=ra.array;for(let j=0;j<a.length;j+=3){const n=1+.1*Math.sin(a[j]*8+a[j+2]*4)+.065*Math.cos(a[j+1]*11-a[j+2]*7);a[j]*=n;a[j+1]*=n;a[j+2]*=n;}rock.computeVertexNormals();const spec=rocks[i]!;const rm=material(spec.color,.98);rm.hooks=submergedHooks({surface:`fn surface(s: Surface) -> Surface {var o=s;let p=s.world*35.0;let grain=sin(p.x+sin(p.z*1.8))*sin(p.y+p.z)*.07+sin(s.world.y*30.0+s.world.x*12.0)*.055;o.base_color=vec4f(s.base_color.rgb*(.8+grain),s.base_color.a);return o;}`});const m=mesh(rock,rm,spec.x,spec.y,spec.z,...spec.r);m.rotation.set(...spec.rot);}
+ for(const b of branches)branch(new Vector3(...b.a),new Vector3(...b.b),b.ra,b.rb);
  // Sponge filter, lift tube and gentle air return.
  const sponge=material(0x172b27,.97);filterBody=mesh(box,sponge,6.45,.95,-2.15,.65,1.6,.65);branch(new Vector3(6.45,1,-2.15),new Vector3(6.45,5.5,-2.15),.055,.055,rim);
 }

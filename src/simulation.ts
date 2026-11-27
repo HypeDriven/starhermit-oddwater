@@ -1,5 +1,6 @@
 import {newEcology,restoreEcology,advanceEcology,habitatPositions} from './ecology.js';
 import type {Ecology} from './ecology.js';
+import {contact} from './obstacles.js';
 // Oddwater's forgiving freshwater ecosystem. All progression uses simulated hours.
 export const clamp=(x:number,a:number,b:number)=>Math.max(a,Math.min(b,x));
 export type FoodKind='flakes'|'sinking'|'greens';
@@ -162,8 +163,26 @@ export function advance(s:Aquarium,seconds:number,speed:number){
 
 // A steady per-animal quirk in -1..1 (after SimPond's fish::quirk), so schools are never in lockstep.
 export function quirk(id:number,salt:number){const v=Math.sin(id*127.1+salt*311.7)*43758.5453;return (v-Math.floor(v))*2-1;}
+/** Keep a fish's nose, middle and tail out of the hardscape: push it out and drop the velocity into the surface. */
+export function collide(f:Fish,half:number,pad:number,filter:number){
+ for(let pass=0;pass<5;pass++){
+  const sp=Math.hypot(f.vx,f.vy,f.vz),hx=sp>1e-4?f.vx/sp:1,hy=sp>1e-4?f.vy/sp:0,hz=sp>1e-4?f.vz/sp:0;let moved=false;
+  for(const along of [.8,0,-.8]){
+   const c=contact(f.x+hx*half*along,f.y+hy*half*along,f.z+hz*half*along,pad,filter);if(!c)continue;
+   // Under an overhang at the floor (or at the surface) the way out is sideways.
+   let nx=c.nx,ny=c.ny,nz=c.nz;if((ny<0&&f.y+ny*c.depth<.3)||(ny>0&&f.y+ny*c.depth>5.58)){const h=Math.hypot(nx,nz);if(h>.05){nx/=h;nz/=h;}else{nx=-hx;nz=-hz;const l=Math.hypot(nx,nz)||1;nx/=l;nz/=l;}ny=0;}
+   f.x=clamp(f.x+nx*c.depth,-6.5,6.5);f.y=clamp(f.y+ny*c.depth,.28,5.6);f.z=clamp(f.z+nz*c.depth,-2.65,2.65);
+   const into=f.vx*nx+f.vy*ny+f.vz*nz;if(into<0){f.vx-=nx*into;f.vy-=ny*into;f.vz-=nz*into;}moved=true;
+  }
+  if(!moved)return;
+ }
+ // Still wedged where rocks overlap: the way out of a pile of stones is up and over.
+ for(let lift=0;lift<12;lift++){let deepest=0;const sp=Math.hypot(f.vx,f.vy,f.vz),hx=sp>1e-4?f.vx/sp:1,hy=sp>1e-4?f.vy/sp:0,hz=sp>1e-4?f.vz/sp:0;
+  for(const along of [.8,0,-.8]){const c=contact(f.x+hx*half*along,f.y+hy*half*along,f.z+hz*half*along,pad,filter);if(c)deepest=Math.max(deepest,c.depth);}
+  if(deepest<=.01)return;f.y=clamp(f.y+Math.max(.03,deepest),.28,5.6);if(f.vy<0)f.vy=0;}
+}
 export function swim(s:Aquarium,dt:number,t:number){
- for(let i=s.pellets.length-1;i>=0;i--){const p=s.pellets[i];p.age+=dt;p.y=Math.max(.25,p.y-dt*foods[p.kind].sink);if(p.kind==='greens'&&p.y<.5){for(const n of s.ecology.colony)if(n.type<4)n.energy=clamp(n.energy+dt*.02,0,1);s.crewEnergy=clamp(s.crewEnergy+dt*.02,0,1);p.age+=dt*.8;}if(p.age>(p.kind==='greens'?70:45)){s.food+=p.kind==='greens'?.025:.04;s.pellets.splice(i,1);}}
+ for(let i=s.pellets.length-1;i>=0;i--){const p=s.pellets[i];p.age+=dt;p.y=Math.max(.25,p.y-dt*foods[p.kind].sink);{const c=contact(p.x,p.y,p.z,.03,s.filter);if(c&&c.ny>.2)p.y+=c.depth/c.ny;}if(p.kind==='greens'&&p.y<.5){for(const n of s.ecology.colony)if(n.type<4)n.energy=clamp(n.energy+dt*.02,0,1);s.crewEnergy=clamp(s.crewEnergy+dt*.02,0,1);p.age+=dt*.8;}if(p.age>(p.kind==='greens'?70:45)){s.food+=p.kind==='greens'?.025:.04;s.pellets.splice(i,1);}}
  for(const f of s.fish){const p=species[f.type],pace=(1+.08*quirk(f.id,1))*(1+.05*Math.sin(t*.05+f.phase*3)),hold=1+.25*quirk(f.id,2);let ax=-f.x*.025,ay=(p.zone+Math.sin(t*.28+f.phase)*.5-f.y)*.24,az=-f.z*.06;let nearest:Pellet|undefined;let best=100;
   if(f.hunger>.12)for(const pellet of s.pellets){if(pellet.kind==='greens'&&f.hunger<.8)continue;const preference=pellet.kind===p.food?1:2.8;const d=preference*((pellet.x-f.x)**2+(pellet.y-f.y)**2+(pellet.z-f.z)**2);if(d<best){best=d;nearest=pellet;}}
   if(nearest&&best<70){ax+=(nearest.x-f.x)*.7;ay+=(nearest.y-f.y)*.7;az+=(nearest.z-f.z)*.7;if(best<.16){const n=s.pellets.indexOf(nearest);if(n>=0)s.pellets.splice(n,1);f.hunger=Math.max(0,f.hunger-.22);f.bond=clamp(f.bond+(nearest.kind===p.food?3:1),0,100);f.meals++;}}
@@ -172,8 +191,10 @@ export function swim(s:Aquarium,dt:number,t:number){
   if(Math.abs(f.x)>5.8)ax-=Math.sign(f.x)*(Math.abs(f.x)-5.8)*1.5;if(Math.abs(f.z)>2.2)az-=Math.sign(f.z)*(Math.abs(f.z)-2.2)*1.5;if(f.y>5.3)ay-=(f.y-5.3)*2;if(f.y<.4)ay+=(.4-f.y)*2;
   // Low refuges are obstacles for bottom foragers, with open water above.
   for(let i=0;i<s.ecology.habitats.length;i++)if(s.ecology.habitats[i]!.kind==='cave'&&f.y<1.1){const b=habitatPositions[i]!,dx=f.x-b.x,dz=f.z-b.z;if(dx*dx+dz*dz<.85){ax+=dx*.7;az+=dz*.7;ay+=.15;}}
-  // The large central stones are steering obstacles, not invisible swim-throughs.
-  const ox=f.x-.4,oz=f.z+.4;const od=ox*ox+oz*oz;if(f.y<1.8&&od<2.1){ax+=ox*.7;az+=oz*.7;ay+=.3;}
+  // Rocks, driftwood and the filter: look ahead along the heading and steer round what is there.
+  const half=p.size*1.42*(.35+.65*f.growth)*.5,pad=half*.36,sp=Math.hypot(f.vx,f.vy,f.vz)||1,hx=f.vx/sp,hy=f.vy/sp,hz=f.vz/sp;
+  for(const reach of [half+.25,half+.7+sp*.6]){const c=contact(f.x+hx*reach,f.y+hy*reach,f.z+hz*reach,pad+.12,s.filter);if(c){const k=1.2+c.depth*6;ax+=c.nx*k;ay+=c.ny*k;az+=c.nz*k;const into=f.vx*c.nx+f.vy*c.ny+f.vz*c.nz;if(into<0){ax-=c.nx*into*2;ay-=c.ny*into*2;az-=c.nz*into*2;}break;}}
   f.vx+=ax*dt;f.vy+=ay*dt;f.vz+=az*dt;const v=Math.sqrt(f.vx*f.vx+f.vy*f.vy+f.vz*f.vz);const cap=p.speed*pace*(nearest?1.8:1.1)*(1-f.stress*.002);if(v>cap){f.vx*=cap/v;f.vy*=cap/v;f.vz*=cap/v;}if(v<.12)f.vx+=.1*dt;f.x=clamp(f.x+f.vx*dt,-6.5,6.5);f.y=clamp(f.y+f.vy*dt,.28,5.6);f.z=clamp(f.z+f.vz*dt,-2.65,2.65);
+  collide(f,half,pad,s.filter);
  }
 }
