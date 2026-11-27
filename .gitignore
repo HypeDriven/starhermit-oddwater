@@ -1,4 +1,5 @@
 .starhermit/
+.claude/
 node_modules/
 dist/
 *.zip
